@@ -12,7 +12,7 @@ BUILD_DIR := build
 # Include directories
 INCLUDE_DIRS := $(SRC_DIR) $(WPILIB_DIR)/cpp/current/include $(WPILIB_DIR)/user/cpp/include
 
-# Include directories
+# Library directories
 LIB_DIRS := $(WPILIB_DIR)/user/cpp/lib $(WPILIB_DIR)/cpp/current/lib
 
 # All source files, recursively found in SRC_DIR
@@ -20,6 +20,3 @@ CPP_SRC := $(shell find $(SRC_DIR) -name '*.cpp')
 
 # All object files, from CPP_SRC
 OBJS := $(addprefix $(BUILD_DIR)/,$(CPP_SRC:%.cpp=%.o))
-
-# Dependencies from CPP_SRC
-CPP_DEPS := $(addprefix $(BUILD_DIR)/,$(CPP_SRC:%.cpp=%.d))
