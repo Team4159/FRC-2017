@@ -10,12 +10,12 @@
 #include "Commands/ExampleCommand.h"
 #include "CommandBase.h"
 
-class Robot: public frc::IterativeRobot {
+class Robot: public IterativeRobot {
 public:
 	void RobotInit() override {
-		chooser.AddDefault("Default Auto", new ExampleCommand());
+		// chooser.AddDefault("Default Auto", new ExampleCommand());
 		// chooser.AddObject("My Auto", new MyAutoCommand());
-		frc::SmartDashboard::PutData("Auto Modes", &chooser);
+		// SmartDashboard::PutData("Auto Modes", &chooser);
 	}
 
 	/**
@@ -28,7 +28,7 @@ public:
 	}
 
 	void DisabledPeriodic() override {
-		frc::Scheduler::GetInstance()->Run();
+		Scheduler::GetInstance()->Run();
 	}
 
 	/**
@@ -51,7 +51,7 @@ public:
 			autonomousCommand.reset(new ExampleCommand());
 		} */
 
-		autonomousCommand.reset(chooser.GetSelected());
+		autonomousCommand.reset(/*chooser.GetSelected()*/ NULL);
 
 		if (autonomousCommand.get() != nullptr) {
 			autonomousCommand->Start();
@@ -59,7 +59,7 @@ public:
 	}
 
 	void AutonomousPeriodic() override {
-		frc::Scheduler::GetInstance()->Run();
+		Scheduler::GetInstance()->Run();
 	}
 
 	void TeleopInit() override {
@@ -73,16 +73,16 @@ public:
 	}
 
 	void TeleopPeriodic() override {
-		frc::Scheduler::GetInstance()->Run();
+		Scheduler::GetInstance()->Run();
 	}
 
 	void TestPeriodic() override {
-		frc::LiveWindow::GetInstance()->Run();
+		LiveWindow::GetInstance()->Run();
 	}
 
 private:
-	std::unique_ptr<frc::Command> autonomousCommand;
-	frc::SendableChooser<frc::Command*> chooser;
+	std::unique_ptr<Command> autonomousCommand;
+	//SendableChooser<Command*> chooser;
 };
 
 START_ROBOT_CLASS(Robot)
