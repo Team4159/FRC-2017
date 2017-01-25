@@ -3,6 +3,9 @@
 
 #include <VictorSP.h>
 
+#include "json.hpp"
+using json = nlohmann::json;
+
 namespace CardinalDash {
 
     class Dashboard {
@@ -22,27 +25,14 @@ namespace CardinalDash {
         static void Subscribe(std::string name, double (*callback)(void* instance), void* object);
         static void Subscribe(std::string name, int (*callback)(void* instance), void* object);
 
-        void PushValues();
+        static void PushValues();
     private:
         enum DataType {
             BOOL, CHAR, FLOAT, DOUBLE, INT
         };
 
         struct DashboardValue {
-            DashboardValue(std::string n, DataType t, void* cb)
-            {
-                name = n;
-                type = t;
-                callback = cb;
-            }
-
-            std::string name;
-            DataType type;
-            void* callback;
-        };
-
-        struct DashboardMemberValue {
-            DashboardMemberValue(std::string n, DataType t, void* cb, void* obj)
+            DashboardValue(std::string n, DataType t, void* cb, void* obj)
             {
                 name = n;
                 type = t;
@@ -56,8 +46,11 @@ namespace CardinalDash {
             void* object;
         };
 
+        static void SubscribeToValue(std::string name, DataType type, void* callback, void* object);
+
+        static void GetValue(DashboardValue* value, json& data);
+
         static std::vector<DashboardValue> *subscribedValues;
-        static std::vector<DashboardMemberValue> *subscribedMemberValues;
     };
 
 };

@@ -3,6 +3,8 @@
 <project name="FRC Deployment" default="deploy">
 
   <property name="team-number" value="4159"/>
+	
+  <property name="target" value="roborio-4159-frc.local"/>
 
   <property file="${user.home}/wpilib/wpilib.properties"/>
   <property file="build.properties"/>
