@@ -12,6 +12,7 @@ namespace CardinalDash {
 
     void Dashboard::Init()
     {
+        Server::Init();
         PDP::Init();
     }
 
@@ -19,9 +20,9 @@ namespace CardinalDash {
     {
         json data;
 
-        for(DashboardValue &value : *subscribedValues)
+        for(DashboardValue value : *subscribedValues)
         {
-            GetValue(&value, data);
+            GetValue(value, data);
         }
 
         Server::SendValues(data.dump());
@@ -33,72 +34,72 @@ namespace CardinalDash {
         subscribedValues->push_back(value);
     }
 
-    void Dashboard::GetValue(DashboardValue* value, json& data)
+    void Dashboard::GetValue(DashboardValue value, json& data)
     {
-        if(value->object != nullptr)
+        if(value.object == nullptr)
         {
-            switch(value->type) {
+            switch(value.type) {
             case BOOL:
                 {
-                    bool (*callback)() = (bool (*)())value->callback;
-                    data[value->name] = callback();
+                    bool (*callback)() = (bool (*)())value.callback;
+                    data[value.name] = callback();
                 }
                 break;
             case CHAR:
                 {
-                    char (*callback)() = (char (*)())value->callback;
-                    data[value->name] = callback();
+                    char (*callback)() = (char (*)())value.callback;
+                    data[value.name] = callback();
                 }
                 break;
             case FLOAT:
                 {
-                    float (*callback)() = (float (*)())value->callback;
-                    data[value->name] = callback();
+                    float (*callback)() = (float (*)())value.callback;
+                    data[value.name] = callback();
                 }
                 break;
             case DOUBLE:
                 {
-                    double (*callback)() = (double (*)())value->callback;
-                    data[value->name] = callback();
+                    double (*callback)() = (double (*)())value.callback;
+                    data[value.name] = callback();
                 }
                 break;
             case INT:
                 {
-                    int (*callback)() = (int (*)())value->callback;
-                    data[value->name] = callback();
+                    int (*callback)() = (int (*)())value.callback;
+                    data[value.name] = callback();
                 }
                 break;
             }
         } else{
-            switch(value->type) {
+            switch(value.type) {
             case BOOL:
                 {
-                    bool (*callback)(void* instance) = (bool (*)(void* instance))value->callback;
-                    data[value->name] = callback(value->object);
+                    bool (*callback)(void* instance) = (bool (*)(void* instance))value.callback;
+                    data[value.name] = callback(value.object);
                 }
                 break;
             case CHAR:
                 {
-                    char (*callback)(void* instance) = (char (*)(void* instance))value->callback;
-                    data[value->name] = callback(value->object);
+                    char (*callback)(void* instance) = (char (*)(void* instance))value.callback;
+                    data[value.name] = callback(value.object);
                 }
                 break;
             case FLOAT:
                 {
-                    float (*callback)(void* instance) = (float (*)(void* instance))value->callback;
-                    data[value->name] = callback(value->object);
+                    float (*callback)(void* instance) = (float (*)(void* instance))value.callback;
+                    data[value.name] = callback(value.object);
                 }
                 break;
             case DOUBLE:
                 {
-                    double (*callback)(void* instance) = (double (*)(void* instance))value->callback;
-                    data[value->name] = callback(value->object);
+                    double (*callback)(void* instance) = (double (*)(void* instance))value.callback;
+                    data[value.name] = callback(value.object);
                 }
                 break;
             case INT:
                 {
-                    int (*callback)(void* instance) = (int (*)(void* instance))value->callback;
-                    data[value->name] = callback(value->object);
+                    int (*callback)(void* instance) = (int (*)(void* instance))value.callback;
+                    data[value.name] = callback(value.object);
                 }
                 break;
             }

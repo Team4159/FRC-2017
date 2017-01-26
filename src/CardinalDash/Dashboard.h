@@ -48,7 +48,7 @@ namespace CardinalDash {
 
         static void SubscribeToValue(std::string name, DataType type, void* callback, void* object);
 
-        static void GetValue(DashboardValue* value, json& data);
+        static void GetValue(DashboardValue value, json& data);
 
         static std::vector<DashboardValue> *subscribedValues;
     };

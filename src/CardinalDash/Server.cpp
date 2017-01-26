@@ -7,17 +7,18 @@ using easywsclient::WebSocket;
 #include <iostream>
 
 namespace CardinalDash {
+    WebSocket::pointer Server::webSocket;
+
+    void Server::Init()
+    {
+        webSocket = WebSocket::from_url_no_mask(ipAddr);
+        std::cout << webSocket << std::endl;
+        std::cout << (webSocket == nullptr) << std::endl;
+    }
+
     void Server::SendValues(std::string values)
     {
-        std::unique_ptr<WebSocket> ws(WebSocket::from_url(ipAddr));
-        ws->send(values);
-        while (ws->getReadyState() != WebSocket::CLOSED) {
-            WebSocket::pointer wsp = &*ws; // <-- because a unique_ptr cannot be copied into a lambda
-            ws->poll();
-            ws->dispatch([wsp](const std::string & message) {
-                std::cout << message << std::endl;
-                wsp->close();
-            });
-        }
+        webSocket->send(values);
+        webSocket->poll();
     }
 }
