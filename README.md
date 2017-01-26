@@ -18,3 +18,5 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 - New source files will be automatically added to the build as long as they are in `src`
 - New libraries should be added to `sources.mk`
 - All changes require a new branch and to submit a pull request
+
+## Contributors:
