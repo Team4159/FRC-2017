@@ -20,6 +20,8 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 - All changes require a new branch and to submit a pull request
 
 ## Contributors:
+
+Matthew Cho - teamlyle
 Brandon Lou - brandonlou
 Cole Scott - colescott
 Raymond Chen - Raysandvectors
