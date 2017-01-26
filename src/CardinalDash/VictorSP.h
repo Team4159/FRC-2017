@@ -9,12 +9,7 @@ namespace CardinalDash {
 
     class VictorSP : public frc::VictorSP {
     public:
-        explicit VictorSP(int port) : frc::VictorSP(port) {
-            std::string name = "VictorSP ";
-            name += std::to_string(port);
-
-            Dashboard::Subscribe(name, &getValue, this);
-        };
+        VictorSP(int port);
         static double getValue(void* instance);
     private:
 
