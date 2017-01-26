@@ -5,7 +5,7 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 1. Install required software:
  - Apache ant
  - GNU make
-- Install WPILib (http://wpilib.screenstepslive.com/s/4485/m/13503/l/599679-installing-eclipse-c-java)
+ Install WPILib (http://wpilib.screenstepslive.com/s/4485/m/13503/l/599679-installing-eclipse-c-java)
 - Install WPILib toolchain (http://first.wpi.edu/FRC/roborio/toolchains/)
 
 ## Building
@@ -20,6 +20,12 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 - All changes require a new branch and to submit a pull request
 
 ## Contributors:
+
+Matthew Cho - teamlyle
+Brandon Lou - brandonlou
 Cole Scott - colescott
 Ethan Cho - ethancho17
+Raymond Chen - Raysandvectors
+Thanawat Techaumnuaiwit - thisKappaIsGrey
+Zachary Deng - dengzac
 
