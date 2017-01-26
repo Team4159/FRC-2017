@@ -24,10 +24,8 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 Matthew Cho - teamlyle
 Brandon Lou - brandonlou
 Cole Scott - colescott
+Ethan Cho - ethancho17
 Raymond Chen - Raysandvectors
 Thanawat Techaumnuaiwit - thisKappaIsGrey
 Zachary Deng - dengzac
-
-
-
 
