@@ -23,6 +23,7 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 Cole Scott - colescott
 Raymond Chen - Raysandvectors
 Zachary Deng - dengzac
+Nick Brutschy - nickbrutschy
 
 
 
