@@ -20,6 +20,10 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 - All changes require a new branch and to submit a pull request
 
 ## Contributors:
+<<<<<<< HEAD
 
 Matthew Cho - teamlyle
 Cole Scott - colescott
+=======
+Matthew Cho - teamlyle
+>>>>>>> c62191e895abe4c31a474434433e39ea6db01741
