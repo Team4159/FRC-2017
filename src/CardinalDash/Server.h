@@ -6,13 +6,16 @@
 #include "easywsclient.hpp"
 using easywsclient::WebSocket;
 
+#include "json.hpp"
+using json = nlohmann::json;
+
 namespace CardinalDash {
     class Server {
     public:
         static void Init();
-        static void SendValues(std::string values);
+        static void SendValues(json values);
     private:
-        static constexpr const char* ipAddr = "ws://drivestation-4159.local:5800";
+        static constexpr const char* ipAddr = "ws://Brandons-Mac.local:5800";
         static WebSocket* webSocket;
 
         static bool connected;

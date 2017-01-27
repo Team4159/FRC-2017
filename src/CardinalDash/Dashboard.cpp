@@ -25,7 +25,7 @@ namespace CardinalDash {
             GetValue(value, data);
         }
 
-        Server::SendValues(data.dump());
+        Server::SendValues(data);
     }
 
     void Dashboard::SubscribeToValue(std::string name, Dashboard::DataType type, void* callback, void* object)
