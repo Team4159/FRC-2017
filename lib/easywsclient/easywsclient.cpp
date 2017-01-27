@@ -118,7 +118,7 @@ class _DummyWebSocket : public easywsclient::WebSocket
     void sendBinary(const std::string& message) { }
     void sendBinary(const std::vector<uint8_t>& message) { }
     void sendPing() { }
-    void close() { } 
+    void close() { }
     readyStateValues getReadyState() const { return CLOSED; }
     void _dispatch(Callback_Imp & callable) { }
     void _dispatchBinary(BytesCallback_Imp& callable) { }
@@ -314,7 +314,7 @@ class _RealWebSocket : public easywsclient::WebSocket
             // We got a whole message, now do something with it:
             if (false) { }
             else if (
-                   ws.opcode == wsheader_type::TEXT_FRAME 
+                   ws.opcode == wsheader_type::TEXT_FRAME
                 || ws.opcode == wsheader_type::BINARY_FRAME
                 || ws.opcode == wsheader_type::CONTINUATION
             ) {
@@ -454,10 +454,10 @@ easywsclient::WebSocket::pointer from_url(const std::string& url, bool useMask, 
         fprintf(stderr, "ERROR: Could not parse WebSocket url: %s\n", url.c_str());
         return NULL;
     }
-    fprintf(stderr, "easywsclient: connecting: host=%s port=%d path=/%s\n", host, port, path);
+    //fprintf(stderr, "easywsclient: connecting: host=%s port=%d path=/%s\n", host, port, path);
     socket_t sockfd = hostname_connect(host, port);
     if (sockfd == INVALID_SOCKET) {
-        fprintf(stderr, "Unable to connect to %s:%d\n", host, port);
+        //fprintf(stderr, "Unable to connect to %s:%d\n", host, port);
         return NULL;
     }
     {
