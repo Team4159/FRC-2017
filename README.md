@@ -26,6 +26,7 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 - Ethan Cho - ethancho17
 - Helen Zhang - hezhang2
 - Matthew Cho - teamlyle
+- Nick Brutschy - nickbrutschy
 - Raymond Chen - Raysandvectors
 - Thanawat Techaumnuaiwit - thisKappaIsGrey
 - Zachary Deng - dengzac
