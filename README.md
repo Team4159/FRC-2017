@@ -22,6 +22,7 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
 ## Contributors:
 
 - Brandon Lou - brandonlou
+- Caleb Kahookele - ckahookele
 - Cole Scott - colescott
 - Ethan Cho - ethancho17
 - Helen Zhang - hezhang2
