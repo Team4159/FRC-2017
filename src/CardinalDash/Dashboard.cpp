@@ -1,6 +1,6 @@
 #include "CardinalDash/Dashboard.h"
 
-#include "json.hpp"
+#include <json/json.hpp>
 using json = nlohmann::json;
 
 #include "Server.h"
@@ -25,7 +25,7 @@ namespace CardinalDash {
             GetValue(value, data);
         }
 
-        Server::SendValues(data);
+        Server::SendPeriodicData(data);
     }
 
     void Dashboard::SubscribeToValue(std::string name, Dashboard::DataType type, void* callback, void* object)
@@ -36,37 +36,54 @@ namespace CardinalDash {
 
     void Dashboard::GetValue(DashboardValue value, json& data)
     {
+        auto target = &data;
+
+        std::vector<std::string> result = std::vector<std::string>();
+        const char* str = value.name.c_str();
+
+        do {
+            const char *begin = str;
+            while(*str != '/' && *str)
+                str++;
+            result.push_back(std::string(begin, str));
+        } while (0 != *str++);
+
+        for(auto i : result)
+        {
+            target = &((*target)[i]);
+        }
+
         if(value.object == nullptr)
         {
             switch(value.type) {
             case BOOL:
                 {
                     bool (*callback)() = (bool (*)())value.callback;
-                    data[value.name] = callback();
+                    *target = callback();
                 }
                 break;
             case CHAR:
                 {
                     char (*callback)() = (char (*)())value.callback;
-                    data[value.name] = callback();
+                    *target = callback();
                 }
                 break;
             case FLOAT:
                 {
                     float (*callback)() = (float (*)())value.callback;
-                    data[value.name] = callback();
+                    *target = callback();
                 }
                 break;
             case DOUBLE:
                 {
                     double (*callback)() = (double (*)())value.callback;
-                    data[value.name] = callback();
+                    *target = callback();
                 }
                 break;
             case INT:
                 {
                     int (*callback)() = (int (*)())value.callback;
-                    data[value.name] = callback();
+                    *target = callback();
                 }
                 break;
             }
@@ -75,31 +92,31 @@ namespace CardinalDash {
             case BOOL:
                 {
                     bool (*callback)(void* instance) = (bool (*)(void* instance))value.callback;
-                    data[value.name] = callback(value.object);
+                    *target = callback(value.object);
                 }
                 break;
             case CHAR:
                 {
                     char (*callback)(void* instance) = (char (*)(void* instance))value.callback;
-                    data[value.name] = callback(value.object);
+                    *target = callback(value.object);
                 }
                 break;
             case FLOAT:
                 {
                     float (*callback)(void* instance) = (float (*)(void* instance))value.callback;
-                    data[value.name] = callback(value.object);
+                    *target = callback(value.object);
                 }
                 break;
             case DOUBLE:
                 {
                     double (*callback)(void* instance) = (double (*)(void* instance))value.callback;
-                    data[value.name] = callback(value.object);
+                    *target = callback(value.object);
                 }
                 break;
             case INT:
                 {
                     int (*callback)(void* instance) = (int (*)(void* instance))value.callback;
-                    data[value.name] = callback(value.object);
+                    *target = callback(value.object);
                 }
                 break;
             }

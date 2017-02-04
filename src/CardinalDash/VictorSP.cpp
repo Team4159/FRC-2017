@@ -2,8 +2,7 @@
 
 namespace CardinalDash {
     VictorSP::VictorSP(int port) : frc::VictorSP(port) {
-        std::string name = "VictorSP ";
-        name += std::to_string(port);
+        std::string name = "PWM/" + std::to_string(port) + " (VictorSP)";
 
         Dashboard::Subscribe(name, &getValue, this);
     };

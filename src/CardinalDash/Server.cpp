@@ -1,36 +1,98 @@
 #include "Server.h"
 
-#include "easywsclient.hpp"
-using easywsclient::WebSocket;
+#define ASIO_STANDALONE
 
-#include "json.hpp"
-using json = nlohmann::json;
+using websocketpp::lib::placeholders::_1;
+using websocketpp::lib::bind;
 
 #include <memory>
 #include <iostream>
-#include <time.h>
+#include <chrono>
+#include <string>
 
 namespace CardinalDash {
-    WebSocket::pointer Server::webSocket;
-    bool Server::connected = false;
+    server Server::m_server;
+    std::set<connection,std::owner_less<connection>> Server::clients;
+    std::thread Server::server_thread;
 
     void Server::Init()
     {
-        webSocket = WebSocket::from_url_no_mask(ipAddr);
-        connected = (webSocket != nullptr);
+        clients = std::set<connection,std::owner_less<connection>>();
+
+        try {
+            m_server.init_asio();
+        } catch (const std::exception& e) {
+            std::cout << e.what();
+        }
+
+        // Disable all console spam from server
+        m_server.clear_access_channels(websocketpp::log::alevel::all);
+
+        try {
+            m_server.set_open_handler(bind(&Server::OnOpen,_1));
+            m_server.set_close_handler(bind(&Server::OnClose,_1));
+        } catch (const std::exception& e) {
+            std::cout << e.what();
+        }
+
+        try {
+            server_thread = std::thread(Server::RunServer);
+        } catch (const std::exception& e) {
+            std::cout << e.what();
+        }
     }
 
-    void Server::SendValues(json values)
+    void Server::SendPeriodicData(json data)
     {
-        if(connected)
+        json sendData;
+        std::chrono::milliseconds ms = std::chrono::duration_cast< std::chrono::milliseconds >(
+            std::chrono::system_clock::now().time_since_epoch()
+        );
+        sendData["time"] = std::to_string(ms.count());
+        sendData["type"] = "periodic";
+        sendData["data"] = data;
+        std::set<connection,std::owner_less<connection>>::iterator it;
+        for (it = clients.begin(); it != clients.end(); ++it)
         {
-            json data;
-            time_t now = time(0);
-            data[ctime(&now)] = values;
-            webSocket->send(data.dump());
-            webSocket->poll();
-        } else {
-            Init();
+            m_server.send(*it,sendData.dump(),websocketpp::frame::opcode::text);
         }
+    }
+    
+    void Server::SendEventData(json data)
+    { 
+        json sendData;
+        std::chrono::milliseconds ms = std::chrono::duration_cast< std::chrono::milliseconds >(
+            std::chrono::system_clock::now().time_since_epoch()
+        );
+        sendData["time"] = std::to_string(ms.count());
+        sendData["type"] = "event";
+        sendData["data"] = data;
+        std::set<connection,std::owner_less<connection>>::iterator it;
+        for (it = clients.begin(); it != clients.end(); ++it)
+        {
+            m_server.send(*it,sendData.dump(),websocketpp::frame::opcode::text);
+        }
+    }
+    
+    void Server::Term()
+    {
+        m_server.stop_listening();
+    }
+
+    void Server::OnOpen(connection hdl)
+    {
+        clients.insert(hdl);
+    }
+
+    void Server::OnClose(connection hdl)
+    {
+        clients.erase(hdl);
+    }
+
+    void Server::RunServer()
+    {
+        m_server.listen(5800);
+        m_server.start_accept();
+        m_server.run();
     }
 }

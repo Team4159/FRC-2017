@@ -3,7 +3,7 @@
 
 #include <VictorSP.h>
 
-#include "json.hpp"
+#include <json/json.hpp>
 using json = nlohmann::json;
 
 namespace CardinalDash {
