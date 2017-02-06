@@ -18,6 +18,10 @@ LIB_FLAGS := $(foreach dir,$(LIB_DIRS),-L"$(dir)")
 # all target
 all: frc-build
 
+# linting
+lint:
+	astyle --recursive --suffix=none --options=.astylerc "./src/*.cpp" "./src/*.h"
+
 # Create all output directories
 output-dir: $(OUTPUT_DIRS)
 
