@@ -52,6 +52,6 @@ namespace CardinalDash
 
         data["message"] = message;
 
-        Server::SendEventData(data);
+        Server::SendEventData ( data );
     }
 }
