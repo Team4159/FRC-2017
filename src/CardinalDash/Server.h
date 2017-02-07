@@ -27,6 +27,8 @@ namespace CardinalDash
             static void OnClose ( connection con );
             static void Term();
         private:
+            static const int SERVER_PORT = 5800;
+
             static server m_server;
 
             static void RunServer();

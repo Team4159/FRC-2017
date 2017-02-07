@@ -92,7 +92,7 @@ namespace CardinalDash
 
     void Server::RunServer()
     {
-        m_server.listen ( 5800 );
+        m_server.listen ( SERVER_PORT );
         m_server.start_accept();
         m_server.run();
     }
