@@ -1,3 +1,5 @@
+#include "Robot.h"
+
 #include <memory>
 #include <signal.h>
 #include <iostream>
@@ -13,68 +15,59 @@
 #include "CardinalDash/IterativeRobot.h"
 #include "CardinalDash/Server.h"
 
-class Robot: public CardinalDash::IterativeRobot {
-public:
-    static void term(int signum)
-    {
-        CardinalDash::Server::Term();
-    }
+void Robot::term ( int signum ) {
+    CardinalDash::Server::Term();
+}
 
-	void RobotInit() override {
-        struct sigaction action;
-        memset(&action, 0, sizeof(struct sigaction));
-        action.sa_handler = (void(*)(int))term;
-        sigaction(SIGTERM, &action, NULL);
+void Robot::RobotInit() {
+    struct sigaction action;
+    memset ( &action, 0, sizeof ( struct sigaction ) );
+    action.sa_handler = ( void ( * ) ( int ) ) term;
+    sigaction ( SIGTERM, &action, NULL );
 
-        IterativeRobot::RobotInit();
+    IterativeRobot::RobotInit();
 
-        CommandBase::Init();
-	}
+    CommandBase::Init();
+}
 
-    void RobotPeriodic() override {
-        IterativeRobot::RobotPeriodic();
-    }
+void Robot::RobotPeriodic() {
+    IterativeRobot::RobotPeriodic();
+}
 
-	void DisabledInit() override {
-        IterativeRobot::DisabledInit();
-	}
+void Robot::DisabledInit() {
+    IterativeRobot::DisabledInit();
+}
 
-	void DisabledPeriodic() override {
-        IterativeRobot::DisabledPeriodic();
+void Robot::DisabledPeriodic() {
+    IterativeRobot::DisabledPeriodic();
 
-		Scheduler::GetInstance()->Run();
-	}
+    Scheduler::GetInstance()->Run();
+}
 
-	void AutonomousInit() override {
-        IterativeRobot::AutonomousInit();
-	}
+void Robot::AutonomousInit() {
+    IterativeRobot::AutonomousInit();
+}
 
-	void AutonomousPeriodic() override {
-        IterativeRobot::AutonomousPeriodic();
+void Robot::AutonomousPeriodic() {
+    IterativeRobot::AutonomousPeriodic();
 
-		Scheduler::GetInstance()->Run();
-	}
+    Scheduler::GetInstance()->Run();
+}
 
-	void TeleopInit() override {
-        IterativeRobot::TeleopInit();
+void Robot::TeleopInit() {
+    IterativeRobot::TeleopInit();
+}
 
-	}
+void Robot::TeleopPeriodic() {
+    IterativeRobot::TeleopPeriodic();
 
-	void TeleopPeriodic() override {
-        IterativeRobot::TeleopPeriodic();
+    Scheduler::GetInstance()->Run();
+}
 
-		Scheduler::GetInstance()->Run();
-	}
+void Robot::TestPeriodic() {
+    IterativeRobot::TestPeriodic();
 
-	void TestPeriodic() override {
-        IterativeRobot::TestPeriodic();
+    LiveWindow::GetInstance()->Run();
+}
 
-		LiveWindow::GetInstance()->Run();
-	}
-
-private:
-	//std::unique_ptr<Command> autonomousCommand;
-	//SendableChooser<Command*> chooser;
-};
-
-START_ROBOT_CLASS(Robot)
+START_ROBOT_CLASS ( Robot )
