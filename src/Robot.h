@@ -36,6 +36,7 @@ class Robot: public CardinalDash::IterativeRobot
         void TestPeriodic() override;
 
     private:
+        typedef IterativeRobot super;
         //std::unique_ptr<Command> autonomousCommand;
         //SendableChooser<Command*> chooser;
 };

@@ -12,7 +12,6 @@
 
 #include "CommandBase.h"
 
-#include "CardinalDash/IterativeRobot.h"
 #include "CardinalDash/Server.h"
 
 void Robot::term ( int signum ) {
@@ -25,47 +24,47 @@ void Robot::RobotInit() {
     action.sa_handler = ( void ( * ) ( int ) ) term;
     sigaction ( SIGTERM, &action, NULL );
 
-    IterativeRobot::RobotInit();
+    super::RobotInit();
 
     CommandBase::Init();
 }
 
 void Robot::RobotPeriodic() {
-    IterativeRobot::RobotPeriodic();
+    super::RobotPeriodic();
 }
 
 void Robot::DisabledInit() {
-    IterativeRobot::DisabledInit();
+    super::DisabledInit();
 }
 
 void Robot::DisabledPeriodic() {
-    IterativeRobot::DisabledPeriodic();
+    super::DisabledPeriodic();
 
     Scheduler::GetInstance()->Run();
 }
 
 void Robot::AutonomousInit() {
-    IterativeRobot::AutonomousInit();
+    super::AutonomousInit();
 }
 
 void Robot::AutonomousPeriodic() {
-    IterativeRobot::AutonomousPeriodic();
+    super::AutonomousPeriodic();
 
     Scheduler::GetInstance()->Run();
 }
 
 void Robot::TeleopInit() {
-    IterativeRobot::TeleopInit();
+    super::TeleopInit();
 }
 
 void Robot::TeleopPeriodic() {
-    IterativeRobot::TeleopPeriodic();
+    super::TeleopPeriodic();
 
     Scheduler::GetInstance()->Run();
 }
 
 void Robot::TestPeriodic() {
-    IterativeRobot::TestPeriodic();
+    super::TestPeriodic();
 
     LiveWindow::GetInstance()->Run();
 }
