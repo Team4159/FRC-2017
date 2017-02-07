@@ -3,22 +3,24 @@
 
 #include <IterativeRobot.h>
 
-namespace CardinalDash {
-    class IterativeRobot : public frc::IterativeRobot{
-    public:
-        IterativeRobot();
-        virtual void RobotInit();
-        virtual void DisabledInit();
-        virtual void AutonomousInit();
-        virtual void TeleopInit();
-        virtual void TestInit();
+namespace CardinalDash
+{
+    class IterativeRobot : public frc::IterativeRobot
+    {
+        public:
+            IterativeRobot();
+            virtual void RobotInit();
+            virtual void DisabledInit();
+            virtual void AutonomousInit();
+            virtual void TeleopInit();
+            virtual void TestInit();
 
-        virtual void RobotPeriodic();
-        virtual void DisabledPeriodic();
-        virtual void AutonomousPeriodic();
-        virtual void TeleopPeriodic();
-        virtual void TestPeriodic();
-    private:
+            virtual void RobotPeriodic();
+            virtual void DisabledPeriodic();
+            virtual void AutonomousPeriodic();
+            virtual void TeleopPeriodic();
+            virtual void TestPeriodic();
+        private:
     };
 }
 

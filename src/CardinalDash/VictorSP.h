@@ -5,13 +5,15 @@
 
 #include "CardinalDash/Dashboard.h"
 
-namespace CardinalDash {
+namespace CardinalDash
+{
 
-    class VictorSP : public frc::VictorSP {
-    public:
-        VictorSP(int port);
-        static double getValue(void* instance);
-    private:
+    class VictorSP : public frc::VictorSP
+    {
+        public:
+            VictorSP ( int port );
+            static double getValue ( void* instance );
+        private:
 
     };
 
