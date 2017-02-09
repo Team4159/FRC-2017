@@ -14,11 +14,13 @@
 
 #include "CardinalDash/Server.h"
 
-void Robot::term ( int signum ) {
+void Robot::term ( int signum )
+{
     CardinalDash::Server::Term();
 }
 
-void Robot::RobotInit() {
+void Robot::RobotInit()
+{
     struct sigaction action;
     memset ( &action, 0, sizeof ( struct sigaction ) );
     action.sa_handler = ( void ( * ) ( int ) ) term;
@@ -29,41 +31,49 @@ void Robot::RobotInit() {
     CommandBase::Init();
 }
 
-void Robot::RobotPeriodic() {
+void Robot::RobotPeriodic()
+{
     super::RobotPeriodic();
 }
 
-void Robot::DisabledInit() {
+void Robot::DisabledInit()
+{
     super::DisabledInit();
 }
 
-void Robot::DisabledPeriodic() {
+void Robot::DisabledPeriodic()
+{
     super::DisabledPeriodic();
 
     Scheduler::GetInstance()->Run();
 }
 
-void Robot::AutonomousInit() {
+void Robot::AutonomousInit()
+{
     super::AutonomousInit();
 }
 
-void Robot::AutonomousPeriodic() {
+void Robot::AutonomousPeriodic()
+{
     super::AutonomousPeriodic();
 
     Scheduler::GetInstance()->Run();
 }
 
-void Robot::TeleopInit() {
+void Robot::TeleopInit()
+{
     super::TeleopInit();
 }
 
-void Robot::TeleopPeriodic() {
+void Robot::TeleopPeriodic()
+{
     super::TeleopPeriodic();
 
     Scheduler::GetInstance()->Run();
 }
 
-void Robot::TestPeriodic() {
+void Robot::TestPeriodic()
+{
     super::TestPeriodic();
 
     LiveWindow::GetInstance()->Run();
