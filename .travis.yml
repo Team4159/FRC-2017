@@ -1,0 +1,14 @@
+dist: trusty
+sudo: required
+
+language: cpp
+
+before_install:
+  - sudo apt-add-repository ppa:wpilib/toolchain -y
+  - sudo apt-get -qq update
+  - sudo apt-get install -y frc-toolchain
+  - wget https://s3-us-west-1.amazonaws.com/team-4159/wpilib.zip
+  - unzip wpilib.zip
+  - mv wpilib/ ~
+
+script: make
