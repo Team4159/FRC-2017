@@ -1,4 +1,6 @@
 # FRC4159-2017
+[![Build Status](https://travis-ci.org/Team4159/FRC4159-2017.svg?branch=master)](https://travis-ci.org/Team4159/FRC4159-2017)
+
 Team 4159 CardinalBotics robot code for 2017 FRC season
 
 ## Setup
