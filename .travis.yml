@@ -7,7 +7,7 @@ before_install:
   - sudo apt-add-repository ppa:wpilib/toolchain -y
   - sudo apt-get -qq update
   - sudo apt-get install -y frc-toolchain
-  - wget http://www.filehosting.org/file/details/640469/wpilib.zip
+  - wget https://s3-us-west-1.amazonaws.com/cardinal-birds-dev/wpilib.zip
   - unzip wpilib.zip
   - mv wpilib/ ~
 
