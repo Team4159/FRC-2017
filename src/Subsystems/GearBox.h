@@ -10,8 +10,9 @@ class GearBox : public Subsystem
 {
     private:
         std::unique_ptr<CardinalDash::VictorSP> IntakeVictor;
-        std::unique_ptr<frc::DoubleSolenoid> lifterSolenoid;
-        std::unique_ptr<frc::DoubleSolenoid> gripperSolenoid;
+        std::unique_ptr<frc::DoubleSolenoid> LifterSolenoidLeft;
+        std::unique_ptr<frc::DoubleSolenoid> LifterSolenoidRight;
+        std::unique_ptr<frc::DoubleSolenoid> GripperSolenoid;
     public:
         GearBox();
         void InitDefaultCommand();
