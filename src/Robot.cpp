@@ -13,6 +13,7 @@
 #include <CameraServer.h>
 
 #include "CommandBase.h"
+#include "Commands/AutoCommand.h"
 
 #include "CardinalDash/Server.h"
 
@@ -45,6 +46,7 @@ void Robot::RobotPeriodic()
 void Robot::DisabledInit()
 {
     super::DisabledInit();
+    CommandBase::Disable();
 }
 
 void Robot::DisabledPeriodic()
@@ -57,6 +59,13 @@ void Robot::DisabledPeriodic()
 void Robot::AutonomousInit()
 {
     super::AutonomousInit();
+    CommandBase::Enable();
+
+    autonomousCommand = std::make_unique<AutoCommand> ( false );
+
+    if ( autonomousCommand.get() != nullptr ) {
+        autonomousCommand->Start();
+    }
 }
 
 void Robot::AutonomousPeriodic()

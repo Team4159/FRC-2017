@@ -39,7 +39,7 @@ class Robot: public CardinalDash::IterativeRobot
 
     private:
         typedef IterativeRobot super;
-        //std::unique_ptr<Command> autonomousCommand;
         frc::CameraServer * cameraServer;
+        std::unique_ptr<Command> autonomousCommand;
         //SendableChooser<Command*> chooser;
 };
