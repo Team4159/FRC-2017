@@ -6,12 +6,19 @@
 
 #include "CardinalDash/VictorSP.h"
 
+#include "WPILib.h"
+
 class GearBox : public Subsystem
 {
     private:
+        static std::unique_ptr<PowerDistributionPanel> pdp;
+
+        const int INTAKE_PDP_PORT = 12;
+
         std::unique_ptr<CardinalDash::VictorSP> IntakeVictor;
-        std::unique_ptr<frc::DoubleSolenoid> lifterSolenoid;
-        std::unique_ptr<frc::DoubleSolenoid> gripperSolenoid;
+        std::unique_ptr<frc::DoubleSolenoid> LifterSolenoidLeft;
+        std::unique_ptr<frc::DoubleSolenoid> LifterSolenoidRight;
+        std::unique_ptr<frc::DoubleSolenoid> GripperSolenoid;
     public:
         GearBox();
         void InitDefaultCommand();
