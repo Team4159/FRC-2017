@@ -80,3 +80,9 @@ bool OI::GetGripper()
 {
     return !secondaryStick->GetTrigger();
 }
+
+
+bool OI::GetRecording()
+{
+    return leftStick->GetTrigger() && rightStick->GetTrigger();
+}

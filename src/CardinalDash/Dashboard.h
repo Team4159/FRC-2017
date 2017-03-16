@@ -39,7 +39,8 @@ namespace CardinalDash
             };
 
             struct DashboardValue {
-                DashboardValue ( std::string n, DataType t, void* cb, void* obj ) {
+                DashboardValue ( std::string n, DataType t, void* cb, void* obj )
+                {
                     name = n;
                     type = t;
                     callback = cb;

@@ -21,6 +21,7 @@ class OI
         bool GetLifter();
         bool GetShift();
         bool GetGripper();
+        bool GetRecording();
 
     private:
 #ifndef OI_XBOX_PRIMARY
@@ -33,6 +34,7 @@ class OI
 
         bool lifterPosition = true; // up
         bool shifterPosition = false; // Low gear
+        bool recording = false;
 };
 
 #endif  // OI_H
