@@ -22,6 +22,8 @@ void TeleopDrive::Execute()
     CommandBase::gearBox->Set ( CommandBase::oi->GetIntake() );
     CommandBase::gearBox->SetLifter ( CommandBase::oi->GetLifter() );
     CommandBase::gearBox->SetGripper ( CommandBase::oi->GetGripper() );
+
+    CommandBase::climber->Set ( CommandBase::oi->GetClimber() );
 }
 
 bool TeleopDrive::IsFinished()
