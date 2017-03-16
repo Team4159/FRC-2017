@@ -1,5 +1,7 @@
 #include "TeleopDrive.h"
 
+#include <math.h>
+
 #include "CommandBase.h"
 
 TeleopDrive::TeleopDrive() : CommandBase ( "TeleopDrive" )
@@ -10,13 +12,13 @@ TeleopDrive::TeleopDrive() : CommandBase ( "TeleopDrive" )
 
 void TeleopDrive::Initialize()
 {
-
+    CommandBase::drivetrain->DisablePID();
 }
 
 void TeleopDrive::Execute()
 {
-    CommandBase::drivetrain->Set ( CommandBase::oi->GetLeftJoystick(),
-                                   CommandBase::oi->GetRightJoystick() );
+    CommandBase::drivetrain->SetRaw ( pow ( CommandBase::oi->GetLeftJoystick(), 2 ) * ( CommandBase::oi->GetLeftJoystick() < 0 ? -1 : 1 ),
+                                      pow ( CommandBase::oi->GetRightJoystick(), 2 ) * ( CommandBase::oi->GetRightJoystick() < 0 ? -1 : 1 ) );
     CommandBase::drivetrain->Shift ( CommandBase::oi->GetShift() );
 
     CommandBase::gearBox->Set ( CommandBase::oi->GetIntake() );
@@ -33,7 +35,7 @@ bool TeleopDrive::IsFinished()
 
 void TeleopDrive::End()
 {
-
+    CommandBase::drivetrain->DisablePID();
 }
 
 void TeleopDrive::Interrupted()
