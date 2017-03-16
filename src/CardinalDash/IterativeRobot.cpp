@@ -38,27 +38,27 @@ namespace CardinalDash
 
     void IterativeRobot::RobotPeriodic()
     {
-        CardinalDash::Dashboard::PushValues();
+
     }
 
     void IterativeRobot::DisabledPeriodic()
     {
-
+        CardinalDash::Dashboard::PushValues();
     }
 
     void IterativeRobot::AutonomousPeriodic()
     {
-
+        CardinalDash::Dashboard::PushValues();
     }
 
     void IterativeRobot::TeleopPeriodic()
     {
-
+        CardinalDash::Dashboard::PushValues();
     }
 
     void IterativeRobot::TestPeriodic()
     {
-
+        CardinalDash::Dashboard::PushValues();
     }
 
 }
