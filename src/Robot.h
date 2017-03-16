@@ -10,6 +10,8 @@
 
 #include "CommandBase.h"
 
+#include <CameraServer.h>
+
 #include "CardinalDash/IterativeRobot.h"
 
 class Robot: public CardinalDash::IterativeRobot
@@ -38,5 +40,6 @@ class Robot: public CardinalDash::IterativeRobot
     private:
         typedef IterativeRobot super;
         //std::unique_ptr<Command> autonomousCommand;
+        frc::CameraServer * cameraServer;
         //SendableChooser<Command*> chooser;
 };

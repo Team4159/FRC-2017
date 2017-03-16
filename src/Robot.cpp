@@ -10,6 +10,8 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
 
+#include <CameraServer.h>
+
 #include "CommandBase.h"
 
 #include "CardinalDash/Server.h"
@@ -27,6 +29,10 @@ void Robot::RobotInit()
     sigaction ( SIGTERM, &action, NULL );
 
     super::RobotInit();
+
+    cameraServer = frc::CameraServer::GetInstance();
+
+    cameraServer->StartAutomaticCapture();
 
     CommandBase::Init();
 }
