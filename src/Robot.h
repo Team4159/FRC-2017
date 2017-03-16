@@ -4,6 +4,7 @@
 
 #include <Commands/Command.h>
 #include <Commands/Scheduler.h>
+#include <Commands/AutoRecorder.h>
 #include <LiveWindow/LiveWindow.h>
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
@@ -41,5 +42,6 @@ class Robot: public CardinalDash::IterativeRobot
         typedef IterativeRobot super;
         frc::CameraServer * cameraServer;
         std::unique_ptr<Command> autonomousCommand;
+        std::unique_ptr<AutoRecorder> autoRecorder;
         //SendableChooser<Command*> chooser;
 };

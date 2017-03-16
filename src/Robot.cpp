@@ -61,7 +61,7 @@ void Robot::AutonomousInit()
     super::AutonomousInit();
     CommandBase::Enable();
 
-    autonomousCommand = std::make_unique<AutoCommand> ( false );
+    autonomousCommand = std::make_unique<AutoRecorder> ( false );
 
     if ( autonomousCommand.get() != nullptr ) {
         autonomousCommand->Start();
@@ -78,11 +78,26 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
     super::TeleopInit();
+    CommandBase::Enable();
+
+    autoRecorder = std::make_unique<AutoRecorder> ( true );
+
+    if ( autonomousCommand != nullptr ) {
+        autonomousCommand->Cancel();
+    }
+
+    CommandBase::Enable();
 }
 
 void Robot::TeleopPeriodic()
 {
     super::TeleopPeriodic();
+
+    if ( CommandBase::oi->GetRecording() && !autoRecorder->IsRunning() ) {
+        autoRecorder->Start();
+    } else if ( !CommandBase::oi->GetRecording() && autoRecorder->IsRunning() ) {
+        autoRecorder->Cancel();
+    }
 
     Scheduler::GetInstance()->Run();
 }
