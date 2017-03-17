@@ -5,7 +5,6 @@ using json = nlohmann::json;
 
 #include "Server.h"
 #include "PDP.h"
-#include "Status.h"
 
 namespace CardinalDash
 {
@@ -16,7 +15,6 @@ namespace CardinalDash
     {
         Server::Init();
         PDP::Init();
-        Status::Init();
     }
 
     void Dashboard::PushValues()

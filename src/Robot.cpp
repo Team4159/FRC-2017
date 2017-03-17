@@ -10,10 +10,7 @@
 #include <SmartDashboard/SendableChooser.h>
 #include <SmartDashboard/SmartDashboard.h>
 
-#include <CameraServer.h>
-
 #include "CommandBase.h"
-#include "Commands/AutoCommand.h"
 
 #include "CardinalDash/Server.h"
 
@@ -31,10 +28,6 @@ void Robot::RobotInit()
 
     super::RobotInit();
 
-    cameraServer = frc::CameraServer::GetInstance();
-
-    cameraServer->StartAutomaticCapture();
-
     CommandBase::Init();
 }
 
@@ -46,7 +39,6 @@ void Robot::RobotPeriodic()
 void Robot::DisabledInit()
 {
     super::DisabledInit();
-    CommandBase::Disable();
 }
 
 void Robot::DisabledPeriodic()
@@ -59,13 +51,6 @@ void Robot::DisabledPeriodic()
 void Robot::AutonomousInit()
 {
     super::AutonomousInit();
-    CommandBase::Enable();
-
-    autonomousCommand = std::make_unique<AutoRecorder> ( false );
-
-    if ( autonomousCommand.get() != nullptr ) {
-        autonomousCommand->Start();
-    }
 }
 
 void Robot::AutonomousPeriodic()
@@ -78,26 +63,11 @@ void Robot::AutonomousPeriodic()
 void Robot::TeleopInit()
 {
     super::TeleopInit();
-    CommandBase::Enable();
-
-    autoRecorder = std::make_unique<AutoRecorder> ( true );
-
-    if ( autonomousCommand != nullptr ) {
-        autonomousCommand->Cancel();
-    }
-
-    CommandBase::Enable();
 }
 
 void Robot::TeleopPeriodic()
 {
     super::TeleopPeriodic();
-
-    if ( CommandBase::oi->GetRecording() && !autoRecorder->IsRunning() ) {
-        autoRecorder->Start();
-    } else if ( !CommandBase::oi->GetRecording() && autoRecorder->IsRunning() ) {
-        autoRecorder->Cancel();
-    }
 
     Scheduler::GetInstance()->Run();
 }

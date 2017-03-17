@@ -7,15 +7,12 @@
 
 #include "CardinalDash/VictorSP.h"
 
-std::unique_ptr<PowerDistributionPanel> GearBox::pdp = std::make_unique<PowerDistributionPanel>();
-
 GearBox::GearBox() : Subsystem ( "GearBox" )
 {
     IntakeVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_INTAKE );
 
-    LifterSolenoidLeft = std::make_unique<frc::DoubleSolenoid> ( SOLENOID_LIFTER_LEFT_A, SOLENOID_LIFTER_LEFT_B );
-    LifterSolenoidRight = std::make_unique<frc::DoubleSolenoid> ( SOLENOID_LIFTER_RIGHT_A, SOLENOID_LIFTER_RIGHT_B );
-    GripperSolenoid = std::make_unique<frc::DoubleSolenoid> ( 1, SOLENOID_GRIPPER_A, SOLENOID_GRIPPER_B );
+    lifterSolenoid = std::make_unique<frc::DoubleSolenoid> ( 4, 5 );
+    gripperSolenoid = std::make_unique<frc::DoubleSolenoid> ( 6, 7 );
 }
 
 void GearBox::InitDefaultCommand()
@@ -25,25 +22,17 @@ void GearBox::InitDefaultCommand()
 
 void GearBox::Set ( double speed )
 {
-    if ( pdp->GetCurrent ( INTAKE_PDP_PORT ) > 35 ) {
-        IntakeVictor->Set ( 0 );
-    } else if ( pdp->GetCurrent ( INTAKE_PDP_PORT ) > 30 ) {
-        IntakeVictor->Set ( speed * 0.5 );
-    } else {
-        IntakeVictor->Set ( speed );
-    }
+    IntakeVictor->Set ( speed );
 }
 
 void GearBox::SetLifter ( bool up )
 {
-    LifterSolenoidLeft->Set ( up ? frc::DoubleSolenoid::Value::kForward :
-                              frc::DoubleSolenoid::Value::kReverse );
-    LifterSolenoidRight->Set ( up ? frc::DoubleSolenoid::Value::kForward :
-                               frc::DoubleSolenoid::Value::kReverse );
+    lifterSolenoid->Set ( up ? frc::DoubleSolenoid::Value::kForward :
+                          frc::DoubleSolenoid::Value::kReverse );
 }
 
 void GearBox::SetGripper ( bool closed )
 {
-    GripperSolenoid->Set ( closed ? frc::DoubleSolenoid::Value::kForward :
+    gripperSolenoid->Set ( closed ? frc::DoubleSolenoid::Value::kForward :
                            frc::DoubleSolenoid::Value::kReverse );
 }
