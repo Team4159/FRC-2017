@@ -45,10 +45,16 @@ void Drivetrain::InitDefaultCommand()
     SetDefaultCommand ( new TeleopDrive() );
 }
 
-void Drivetrain::SetRaw ( double left, double right )
+void Drivetrain::SetRaw ( double left, double right, bool currentLimit)
 {
-    SetLeftRaw ( left );
-    SetRightRaw ( right );
+	if (currentLimit){
+		SetLeftRaw ( left );
+		SetRightRaw ( right );
+	}
+	else {
+		LeftVictor->Set(left);
+		RightVictor->Set(right);
+	}
 }
 
 void Drivetrain::Set ( double left, double right )

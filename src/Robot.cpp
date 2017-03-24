@@ -14,6 +14,7 @@
 
 #include "CommandBase.h"
 #include "Commands/AutoCommand.h"
+#include "Commands/DeliverGear.h"
 
 #include "CardinalDash/Server.h"
 

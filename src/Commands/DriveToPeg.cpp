@@ -43,7 +43,7 @@ void DriveToPeg::Execute()
     if ( distance==-1 ) {
         return;
     }
-    CommandBase::drivetrain->SetRaw ( leftOutput, rightOutput );
+    CommandBase::drivetrain->SetRaw ( leftOutput, rightOutput, false );
 }
 
 bool DriveToPeg::IsFinished()
@@ -54,7 +54,7 @@ bool DriveToPeg::IsFinished()
 
 void DriveToPeg::End()
 {
-    CommandBase::drivetrain->SetRaw ( 0, 0 );
+    CommandBase::drivetrain->SetRaw ( 0, 0, false );
 }
 
 void DriveToPeg::Interrupted()

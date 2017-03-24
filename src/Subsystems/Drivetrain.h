@@ -16,7 +16,7 @@ class Drivetrain : public Subsystem
         Drivetrain();
         void InitDefaultCommand();
         void Set ( double left, double right );
-        void SetRaw ( double left, double right );
+        void SetRaw ( double left, double right, bool currentLimit = true );
         void SetAdd ( double left, double right );
         void SetLeftRaw ( double left );
         void SetRightRaw ( double right );

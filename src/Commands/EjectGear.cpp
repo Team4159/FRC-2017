@@ -20,7 +20,7 @@ void EjectGear::Execute()
 	// Eject gear and start reversing after gear tray lifts up
     if ( timer.Get() < 1.0 ) {
         CommandBase::gearBox->SetGripper ( false );
-		CommandBase::drivetrain->SetRaw ( 1, 1 );
+		CommandBase::drivetrain->SetRaw ( 1, 1, false );
     }
 	
 }
@@ -33,7 +33,7 @@ bool EjectGear::IsFinished()
 
 void EjectGear::End()
 {
-    CommandBase::drivetrain->SetRaw ( 0, 0 );
+    CommandBase::drivetrain->SetRaw ( 0, 0, false );
 }
 
 void EjectGear::Interrupted()
