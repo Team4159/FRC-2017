@@ -5,6 +5,8 @@
 #include "CardinalDash/VictorSP.h"
 #include "CardinalDash/Dashboard.h"
 
+#include "AHRS.h"
+
 #include <DoubleSolenoid.h>
 
 #include <cmath>
@@ -13,6 +15,8 @@ std::unique_ptr<PowerDistributionPanel> Drivetrain::pdp = std::make_unique<Power
 
 Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
 {
+	ahrs = std::make_unique<AHRS> ( SerialPort::kMXP );
+
     LeftVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_LEFT_DRIVE );
     RightVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_RIGHT_DRIVE );
 
@@ -235,4 +239,14 @@ double Drivetrain::GetRightVoltage ( void* instance )
 double Drivetrain::GetEncoderValue ( void* instance )
 {
     return ( ( Encoder* ) instance )->Get();
+}
+
+double Drivetrain::GetAngle ()
+{
+	return ahrs->GetYaw();
+}
+
+void Drivetrain::ResetAngle ()
+{
+	ahrs->Reset();
 }

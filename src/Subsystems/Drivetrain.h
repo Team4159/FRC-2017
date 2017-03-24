@@ -9,6 +9,7 @@
 #include "CardinalDash/VictorSP.h"
 
 #include "WPILib.h"
+#include "AHRS.h"
 
 class Drivetrain : public Subsystem
 {
@@ -41,7 +42,9 @@ class Drivetrain : public Subsystem
         DrivetrainVoltage GetOutputVoltage();
         double GetLeftVoltage();
         double GetRightVoltage();
-
+		
+		double GetAngle();
+		void ResetAngle();
     private:
         // Voltage max of battery, if it was 12 then all motors would drive
         // slower when actual voltage > 12. This is because of the division step
@@ -85,6 +88,8 @@ class Drivetrain : public Subsystem
         std::unique_ptr<frc::PIDController> LeftPID;
         std::unique_ptr<frc::PIDController> RightPID;
 
+		std::unique_ptr<AHRS> ahrs;
+		
         DrivetrainVoltage voltage = DrivetrainVoltage ( 0, 0 );
 
         static double GetLeftVoltage ( void* instance );
