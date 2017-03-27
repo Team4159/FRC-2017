@@ -16,6 +16,7 @@
 #include "Commands/DriveDistance.h"
 #include "Commands/DeliverGear.h"
 #include "Commands/TurnToAngle.h"
+#include "Commands/AutoGear.h"
 
 #include "CardinalDash/Server.h"
 
@@ -38,6 +39,10 @@ void Robot::RobotInit()
     cameraServer->StartAutomaticCapture();
 
     CommandBase::Init();
+	
+	chooser.AddDefault("Center Peg", new AutoGear(0));
+	chooser.AddObject("Left Peg", new AutoGear(-1));
+	chooser.AddObject("Right Peg", new AutoGear(1));
 }
 
 void Robot::RobotPeriodic()
@@ -62,10 +67,10 @@ void Robot::AutonomousInit()
 {
     super::AutonomousInit();
     CommandBase::Enable();
-
-    autonomousCommand = std::make_unique<AutoRecorder> ( false );
-
-    if ( autonomousCommand.get() != nullptr ) {
+	CommandBase::drivetrain->ResetAngle();
+	
+	autonomousCommand = chooser.GetSelected();
+    if ( autonomousCommand != nullptr ) {
         autonomousCommand->Start();
     }
 }
