@@ -1,17 +1,19 @@
-#ifndef AUTO_COMMAND_H
-#define AUTO_COMMAND_H
+#ifndef DRIVE_DISTANCE_H
+#define DRIVE_DISTANCE_H
 
 #include "../CommandBase.h"
 
-class AutoCommand: public CommandBase
+class DriveDistance: public CommandBase
 {
     public:
-        AutoCommand();
+        DriveDistance(double distance);
         void Initialize() override;
         void Execute() override;
         bool IsFinished() override;
         void End() override;
         void Interrupted() override;
+	private:
+		double driveDistance;
 };
 
-#endif  // AUTO_COMMAND_H
+#endif  // DRIVE_DISTANCE_H

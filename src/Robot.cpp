@@ -13,8 +13,9 @@
 #include <CameraServer.h>
 
 #include "CommandBase.h"
-#include "Commands/AutoCommand.h"
+#include "Commands/DriveDistance.h"
 #include "Commands/DeliverGear.h"
+#include "Commands/TurnToAngle.h"
 
 #include "CardinalDash/Server.h"
 
