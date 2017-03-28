@@ -26,7 +26,7 @@ Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
     LeftEncoder = std::make_unique<frc::Encoder> ( ENCODER_DRIVE_LEFT_A, ENCODER_DRIVE_LEFT_B );
     RightEncoder = std::make_unique<frc::Encoder> ( ENCODER_DRIVE_RIGHT_A, ENCODER_DRIVE_RIGHT_B );
 
-    LeftEncoder->SetReverseDirection ( false );
+    LeftEncoder->SetReverseDirection ( true );
     RightEncoder->SetReverseDirection ( true );
 
     LeftEncoder->SetDistancePerPulse ( ENCODER_DISTANCE_PER_PULSE );
@@ -43,13 +43,20 @@ Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
     LeftPID->SetContinuous ( false );
     RightPID->SetContinuous ( false );
 	
+	LeftPID->SetAbsoluteTolerance( PID_LEFT_TOLERANCE );
+	RightPID->SetAbsoluteTolerance( PID_RIGHT_TOLERANCE );
+	
 	TurnPID->SetContinuous ( true );
 	TurnPID->SetInputRange(-180.0, 180.0);
 	TurnPID->SetOutputRange(-1.0, 1.0);
-	TurnPID->SetAbsoluteTolerance(2.0);
+	TurnPID->SetAbsoluteTolerance( PID_TURN_TOLERANCE );
 	LiveWindow::GetInstance()->AddActuator("Drivetrain", "TurnPID", TurnPID.get());
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "LeftPID", LeftPID.get());
+	LiveWindow::GetInstance()->AddActuator("Drivetrain", "RightPID", RightPID.get());
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "Gyro", ahrs.get());
-
+	LiveWindow::GetInstance()->AddSensor("Drivetrain", "LeftEncoder", LeftEncoder.get());
+	LiveWindow::GetInstance()->AddSensor("Drivetrain", "RightEncoder", RightEncoder.get());
+	
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/leftvoltage" ), &GetLeftVoltage, this );
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/rightvoltage" ), &GetRightVoltage, this );
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/leftEncoder" ), &GetEncoderValue, LeftEncoder.get() );
@@ -212,7 +219,7 @@ void Drivetrain::DisablePID()
 
 bool Drivetrain::DistancePIDDone()
 {
-	return LeftPID->OnTarget() && RightPID->OnTarget();
+	return LeftPID->OnTarget();
 }
 
 double Drivetrain::GetLeftPIDOutput()

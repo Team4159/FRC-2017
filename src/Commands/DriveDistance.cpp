@@ -21,12 +21,12 @@ void DriveDistance::Initialize()
 
 void DriveDistance::Execute()
 {
-	double leftoutput = CommandBase::drivetrain->GetLeftPIDOutput() - CommandBase::drivetrain->GetTurnPIDOutput();
+	double leftoutput = -CommandBase::drivetrain->GetLeftPIDOutput() - CommandBase::drivetrain->GetTurnPIDOutput();
 	
 	#ifdef RIGHT_ENCODER_AVAILABLE
-	double rightoutput = CommandBase::drivetrain->GetRightPIDOutput() + CommandBase::drivetrain->GetTurnPIDOutput();
+	double rightoutput = -CommandBase::drivetrain->GetRightPIDOutput() + CommandBase::drivetrain->GetTurnPIDOutput();
 	#else
-	double rightoutput = CommandBase::drivetrain->GetLeftPIDOutput() + CommandBase::drivetrain->GetTurnPIDOutput();
+	double rightoutput = -CommandBase::drivetrain->GetLeftPIDOutput() + CommandBase::drivetrain->GetTurnPIDOutput();
 	#endif
 	frc::SmartDashboard::PutNumber("Angle correction", CommandBase::drivetrain->GetTurnPIDOutput());
 	frc::SmartDashboard::PutNumber("Forward PID", CommandBase::drivetrain->GetLeftPIDOutput());

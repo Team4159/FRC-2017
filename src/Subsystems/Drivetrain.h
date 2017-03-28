@@ -71,16 +71,19 @@ class Drivetrain : public Subsystem
         const double PID_LEFT_I = 0.0;
         const double PID_LEFT_D = 0.01;
         const double PID_LEFT_F = 0.05;
+		const double PID_LEFT_TOLERANCE = 5;
 
         const double PID_RIGHT_P = 0.15;
         const double PID_RIGHT_I = 0.0;
         const double PID_RIGHT_D = 0.01;
         const double PID_RIGHT_F = 0.05;
+		const double PID_RIGHT_TOLERANCE = 5;
 		
 		const double PID_TURN_P = 0.006;
 		const double PID_TURN_I = 0;
 		const double PID_TURN_D = 0.01;
 		const double PID_TURN_F = 0;
+		const double PID_TURN_TOLERANCE = 10;
 
         double lastLeft = 0;
         double lastLeftGhost = 0;
