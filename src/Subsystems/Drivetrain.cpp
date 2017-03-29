@@ -56,9 +56,7 @@ Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "Gyro", ahrs.get());
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "LeftEncoder", LeftEncoder.get());
 	LiveWindow::GetInstance()->AddSensor("Drivetrain", "RightEncoder", RightEncoder.get());
-	
-    CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/leftvoltage" ), &GetLeftVoltage, this );
-    CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/rightvoltage" ), &GetRightVoltage, this );
+
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/leftEncoder" ), &GetEncoderValue, LeftEncoder.get() );
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/rightEncoder" ), &GetEncoderValue, RightEncoder.get() );
 }
@@ -230,45 +228,6 @@ double Drivetrain::GetLeftPIDOutput()
 double Drivetrain::GetRightPIDOutput()
 {
 	return RightOutput->GetValue();
-}
-void Drivetrain::SetVoltage ( DrivetrainVoltage v )
-{
-    voltage = v;
-
-    double robotVoltage = GetVoltage();
-
-    LeftVictor->Set ( v.left / robotVoltage );
-    RightVictor->Set ( v.right / robotVoltage );
-}
-
-double Drivetrain::GetVoltage()
-{
-    return pdp->GetVoltage();
-}
-
-Drivetrain::DrivetrainVoltage Drivetrain::GetOutputVoltage()
-{
-    return voltage;
-}
-
-double Drivetrain::GetLeftVoltage()
-{
-    return GetOutputVoltage().left;
-}
-
-double Drivetrain::GetRightVoltage()
-{
-    return GetOutputVoltage().right;
-}
-
-double Drivetrain::GetLeftVoltage ( void* instance )
-{
-    return ( ( Drivetrain* ) instance )->GetLeftVoltage();
-}
-
-double Drivetrain::GetRightVoltage ( void* instance )
-{
-    return ( ( Drivetrain* ) instance )->GetRightVoltage();
 }
 
 double Drivetrain::GetEncoderValue ( void* instance )

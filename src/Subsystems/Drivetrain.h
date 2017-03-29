@@ -30,22 +30,6 @@ class Drivetrain : public Subsystem
 		double GetLeftPIDOutput();
 		double GetRightPIDOutput();
 		bool DistancePIDDone();
-        struct DrivetrainVoltage {
-            double left;
-            double right;
-
-            DrivetrainVoltage ( double l, double r )
-            {
-                left = l;
-                right = r;
-            }
-        };
-
-        void SetVoltage ( DrivetrainVoltage v );
-        double GetVoltage(); // Get current robot voltage
-        DrivetrainVoltage GetOutputVoltage();
-        double GetLeftVoltage();
-        double GetRightVoltage();
 		
 		void SetTurnAngle ( double value );
 		void EnableTurnPID();
@@ -112,11 +96,7 @@ class Drivetrain : public Subsystem
 		std::unique_ptr<frc::PIDController> TurnPID;
 		std::unique_ptr<AHRS> ahrs;
 		std::unique_ptr<PIDOutputReceiver> TurnOutput;
-		
-        DrivetrainVoltage voltage = DrivetrainVoltage ( 0, 0 );
 
-        static double GetLeftVoltage ( void* instance );
-        static double GetRightVoltage ( void* instance );
         static double GetEncoderValue ( void* instance );
 
 };
