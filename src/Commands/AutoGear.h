@@ -6,7 +6,7 @@
 class AutoGear: public CommandGroup
 {
     public:
-        AutoGear(int peg);
+        AutoGear(int peg, bool diagonal);
 };
 
 #endif  // AUTO_GEAR_H

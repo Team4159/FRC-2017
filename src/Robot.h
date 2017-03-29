@@ -43,5 +43,5 @@ class Robot: public CardinalDash::IterativeRobot
         frc::CameraServer * cameraServer;
         Command* autonomousCommand;
         std::unique_ptr<AutoRecorder> autoRecorder;
-        SendableChooser<Command*> chooser;
+        SendableChooser<Command*>* chooser;
 };

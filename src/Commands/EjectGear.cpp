@@ -10,6 +10,7 @@ EjectGear::EjectGear() : CommandBase ( "EjectGear" )
 
 void EjectGear::Initialize()
 {
+    timer.Reset();
     timer.Start();
     CommandBase::gearBox->SetLifter ( true );
     CommandBase::gearBox->SetGripper ( true );
@@ -17,10 +18,16 @@ void EjectGear::Initialize()
 
 void EjectGear::Execute()
 {
-	// Eject gear and start reversing after gear tray lifts up
-    if ( timer.Get() < 1.0 ) {
+    // Eject gear and start reversing after gear tray lifts up
+    frc::SmartDashboard::PutNumber ( "Cur time", timer.Get() );
+    if ( timer.Get() > 1.0 ) {
         CommandBase::gearBox->SetGripper ( false );
-		CommandBase::drivetrain->SetRaw ( 1, 1, false );
+		if (timer.Get() < 1.8 && timer.Get() > 1.3){
+			CommandBase::drivetrain->SetRaw ( 0.4, 0.4, false );
+		}
+		else {		
+			CommandBase::drivetrain->SetRaw ( 0.2, 0.2, false );
+		}
     }
 	
 }
@@ -28,12 +35,14 @@ void EjectGear::Execute()
 bool EjectGear::IsFinished()
 {
     // Stop after reversing for two seconds
-    return timer.Get() < 3.0;
+    return timer.Get() > 2;
 }
 
 void EjectGear::End()
 {
     CommandBase::drivetrain->SetRaw ( 0, 0, false );
+	CommandBase::gearBox->SetLifter ( false );
+    CommandBase::gearBox->SetGripper ( true );
 }
 
 void EjectGear::Interrupted()

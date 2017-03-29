@@ -19,37 +19,29 @@ void DriveToPeg::Execute()
 {
     double distance = table->GetNumber ( "distance", -1 );
     double angle = table->GetNumber ( "angle", 0 );
-    double outputMagnitude = -0.3;
-    double curve = angle/52*2;
-	// Sensitivity should be higher when farther away 
-	// Causes robot to eventually line up with peg
-    double m_sensitivity = 0.2+(distance/100.0);
-    double leftOutput, rightOutput;
-    double value = std::log ( fabs ( curve ) );
-    double ratio = ( value - m_sensitivity ) / ( value + m_sensitivity );
-    if ( ratio == 0 ) {
-        ratio = .0000000001;
-    }
-    if ( curve < 0 ) {
-        leftOutput = outputMagnitude / ratio;
-        rightOutput = outputMagnitude;
-    } else if ( curve > 0 ) {
-        leftOutput = outputMagnitude;
-        rightOutput = outputMagnitude / ratio;
-    } else {
-        leftOutput = outputMagnitude;
-        rightOutput = outputMagnitude;
-    }
     if ( distance==-1 ) {
-        return;
+		return;
     }
+    double outputMagnitude = -0.3;
+	double curve = angle/70.0;
+    double leftOutput = outputMagnitude - curve;
+	double rightOutput = outputMagnitude + curve;
+
+	// Scale outputs down to fit in range -1 to 1
+	if (std::fabs(leftOutput) > 1 || std::fabs(rightOutput) > 1){
+		// Scale larger output to 1 and keep ratio of two outputs the same
+		double scalefactor = 1.0/std::max(std::fabs(leftOutput), std::fabs(rightOutput));
+		leftOutput *= scalefactor;
+		rightOutput*= scalefactor;
+	}
+
     CommandBase::drivetrain->SetRaw ( leftOutput, rightOutput, false );
 }
 
 bool DriveToPeg::IsFinished()
 {
     double distance = table->GetNumber ( "distance", -1 );
-    return ( distance!=-1 && distance<26 );
+    return ( distance!=-1 && distance<23 );
 }
 
 void DriveToPeg::End()

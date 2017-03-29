@@ -67,21 +67,21 @@ class Drivetrain : public Subsystem
         const double ENCODER_WHEEL_CIRCUMFERENCE = ENCODER_WHEEL_DIAMETER * M_PI;
         const double ENCODER_DISTANCE_PER_PULSE = ENCODER_WHEEL_CIRCUMFERENCE / ENCODER_PULSE_PER_ROTATION;
 
-        const double PID_LEFT_P = 0.15;
+        const double PID_LEFT_P = 0.1;
         const double PID_LEFT_I = 0.0;
         const double PID_LEFT_D = 0.01;
-        const double PID_LEFT_F = 0.05;
-		const double PID_LEFT_TOLERANCE = 5;
+        const double PID_LEFT_F = 0.0;
+		const double PID_LEFT_TOLERANCE = 2;
 
-        const double PID_RIGHT_P = 0.15;
+        const double PID_RIGHT_P = 0.1;
         const double PID_RIGHT_I = 0.0;
         const double PID_RIGHT_D = 0.01;
-        const double PID_RIGHT_F = 0.05;
-		const double PID_RIGHT_TOLERANCE = 5;
+        const double PID_RIGHT_F = 0;
+		const double PID_RIGHT_TOLERANCE = 2;
 		
-		const double PID_TURN_P = 0.006;
+		const double PID_TURN_P = 0.03;
 		const double PID_TURN_I = 0;
-		const double PID_TURN_D = 0.01;
+		const double PID_TURN_D = 0.1;
 		const double PID_TURN_F = 0;
 		const double PID_TURN_TOLERANCE = 10;
 

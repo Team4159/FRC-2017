@@ -14,6 +14,8 @@ class DriveDistance: public CommandBase
         void Interrupted() override;
 	private:
 		double driveDistance;
+		frc::Timer setpointTimer;
+		bool setpointReached;
 };
 
 #endif  // DRIVE_DISTANCE_H

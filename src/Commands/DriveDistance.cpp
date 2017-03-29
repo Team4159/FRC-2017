@@ -17,6 +17,7 @@ void DriveDistance::Initialize()
 	CommandBase::drivetrain->EnableTurnPID();
     CommandBase::drivetrain->Set ( driveDistance, driveDistance );
 	CommandBase::drivetrain->SetTurnAngle(0);
+	setpointReached = false;
 }
 
 void DriveDistance::Execute()
@@ -41,11 +42,22 @@ void DriveDistance::Execute()
 		rightoutput*= scalefactor;
 	}
 	CommandBase::drivetrain->SetRaw(leftoutput, rightoutput, false);
+	if (CommandBase::drivetrain->DistancePIDDone()){
+		if (!setpointReached){
+			setpointTimer.Start();
+			setpointReached = true;
+		}
+	}
+	else {
+		setpointTimer.Stop();
+		setpointTimer.Reset();
+		setpointReached = false;
+	}
 }
 
 bool DriveDistance::IsFinished()
 {
-    return CommandBase::drivetrain->DistancePIDDone();
+    return setpointReached && setpointTimer.Get() > 1.0;
 }
 
 void DriveDistance::End()

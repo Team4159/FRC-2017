@@ -39,10 +39,13 @@ void Robot::RobotInit()
     cameraServer->StartAutomaticCapture();
 
     CommandBase::Init();
-	
-	chooser.AddDefault("Center Peg", new AutoGear(0));
-	chooser.AddObject("Left Peg", new AutoGear(-1));
-	chooser.AddObject("Right Peg", new AutoGear(1));
+	chooser = new SendableChooser<Command*>();
+    chooser->AddDefault ( "Center Peg", new AutoGear ( 0 , false) );
+    chooser->AddObject ( "Left Peg/Turn", new AutoGear ( -1 , true) );
+    chooser->AddObject ( "Right Peg/Turn", new AutoGear ( 1 , true) );
+	chooser->AddObject ( "Left Peg/Forward", new AutoGear ( -1 , false) );
+    chooser->AddObject ( "Right Peg/Forward", new AutoGear ( 1 , false) );
+	SmartDashboard::PutData("Auto mode", chooser);
 }
 
 void Robot::RobotPeriodic()
@@ -69,7 +72,7 @@ void Robot::AutonomousInit()
     CommandBase::Enable();
 	CommandBase::drivetrain->ResetAngle();
 	
-	autonomousCommand = chooser.GetSelected();
+    autonomousCommand = chooser->GetSelected();
     if ( autonomousCommand != nullptr ) {
         autonomousCommand->Start();
     }
