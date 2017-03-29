@@ -13,6 +13,6 @@ before_install:
   - mv wpilib/ ~
   - unzip navx-mxp-libs.zip
   - mkdir navx-mxp
-  - mv roborio/cpp ~/navx-mxp
+  - mv roborio ~/navx-mxp
 
 script: make
