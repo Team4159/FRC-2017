@@ -39,7 +39,7 @@ $(OUTPUT_DIRS):
 $(BUILD_DIR)/FRCUserProgram: output-dir $(OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	$(CPP) $(LINK_FLAGS) $(LIB_FLAGS) -o "$(BUILD_DIR)/FRCUserProgram" $(OBJS) -lwpi
+	$(CPP) $(LINK_FLAGS) $(LIB_FLAGS) -o "$(BUILD_DIR)/FRCUserProgram" $(OBJS) -lwpi -lnavx_frc_cpp
 	@echo 'Finished building target: $@'
 	@echo ' '
 

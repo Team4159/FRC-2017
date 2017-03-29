@@ -10,10 +10,10 @@ SRC_DIR := src
 BUILD_DIR := build
 
 # Include directories
-INCLUDE_DIRS := $(SRC_DIR) $(WPILIB_DIR)/cpp/current/include $(WPILIB_DIR)/user/cpp/include lib/
+INCLUDE_DIRS := $(SRC_DIR) $(WPILIB_DIR)/cpp/current/include $(WPILIB_DIR)/user/cpp/include lib/ $(HOME)/navx-mxp/cpp/include
 
 # Library directories
-LIB_DIRS := $(WPILIB_DIR)/user/cpp/lib $(WPILIB_DIR)/cpp/current/lib
+LIB_DIRS := $(WPILIB_DIR)/user/cpp/lib $(WPILIB_DIR)/cpp/current/lib $(HOME)/navx-mxp/cpp/lib
 
 # All source files, recursively found in SRC_DIR
 CPP_SRC := $(shell find $(SRC_DIR) -name '*.cpp')

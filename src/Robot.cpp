@@ -13,7 +13,10 @@
 #include <CameraServer.h>
 
 #include "CommandBase.h"
-#include "Commands/AutoCommand.h"
+#include "Commands/DriveDistance.h"
+#include "Commands/DeliverGear.h"
+#include "Commands/TurnToAngle.h"
+#include "Commands/AutoGear.h"
 
 #include "CardinalDash/Server.h"
 
@@ -36,6 +39,13 @@ void Robot::RobotInit()
     cameraServer->StartAutomaticCapture();
 
     CommandBase::Init();
+	chooser = new SendableChooser<Command*>();
+    chooser->AddDefault ( "Center Peg", new AutoGear ( 0 , false) );
+    chooser->AddObject ( "Left Peg/Turn", new AutoGear ( -1 , true) );
+    chooser->AddObject ( "Right Peg/Turn", new AutoGear ( 1 , true) );
+	chooser->AddObject ( "Left Peg/Forward", new AutoGear ( -1 , false) );
+    chooser->AddObject ( "Right Peg/Forward", new AutoGear ( 1 , false) );
+	SmartDashboard::PutData("Auto mode", chooser);
 }
 
 void Robot::RobotPeriodic()
@@ -60,10 +70,10 @@ void Robot::AutonomousInit()
 {
     super::AutonomousInit();
     CommandBase::Enable();
-
-    autonomousCommand = std::make_unique<AutoRecorder> ( false );
-
-    if ( autonomousCommand.get() != nullptr ) {
+	CommandBase::drivetrain->ResetAngle();
+	
+    autonomousCommand = chooser->GetSelected();
+    if ( autonomousCommand != nullptr ) {
         autonomousCommand->Start();
     }
 }

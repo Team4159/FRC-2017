@@ -1,17 +1,19 @@
-#ifndef AUTO_COMMAND_H
-#define AUTO_COMMAND_H
+#ifndef EJECT_GEAR_H
+#define EJECT_GEAR_H
 
 #include "../CommandBase.h"
 
-class AutoCommand: public CommandBase
+class EjectGear: public CommandBase
 {
     public:
-        AutoCommand();
+        EjectGear();
         void Initialize() override;
         void Execute() override;
         bool IsFinished() override;
         void End() override;
         void Interrupted() override;
+    private:
+        Timer timer;
 };
 
-#endif  // AUTO_COMMAND_H
+#endif  // EJECT_GEAR_H
