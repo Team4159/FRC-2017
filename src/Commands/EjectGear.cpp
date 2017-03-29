@@ -19,7 +19,6 @@ void EjectGear::Initialize()
 void EjectGear::Execute()
 {
     // Eject gear and start reversing after gear tray lifts up
-    frc::SmartDashboard::PutNumber ( "Cur time", timer.Get() );
     if ( timer.Get() > 1.0 ) {
         CommandBase::gearBox->SetGripper ( false );
 		if (timer.Get() < 1.8 && timer.Get() > 1.3){
