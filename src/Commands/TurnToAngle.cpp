@@ -4,22 +4,22 @@
 
 #include "CommandBase.h"
 
-TurnToAngle::TurnToAngle(double angle) : CommandBase ( "TurnToAngle" )
+TurnToAngle::TurnToAngle ( double angle ) : CommandBase ( "TurnToAngle" )
 {
     Requires ( CommandBase::drivetrain.get() );
-	targetAngle = angle;
+    targetAngle = angle;
 }
 
 void TurnToAngle::Initialize()
 {
-   	CommandBase::drivetrain->DisablePID();
-	CommandBase::drivetrain->EnableTurnPID();
-	CommandBase::drivetrain->SetTurnAngle(targetAngle);
+    CommandBase::drivetrain->DisablePID();
+    CommandBase::drivetrain->EnableTurnPID();
+    CommandBase::drivetrain->SetTurnAngle ( targetAngle );
 }
 
 void TurnToAngle::Execute()
 {
-	CommandBase::drivetrain->SetRaw(-CommandBase::drivetrain->GetTurnPIDOutput(), CommandBase::drivetrain->GetTurnPIDOutput(), false);
+    CommandBase::drivetrain->SetRaw ( -CommandBase::drivetrain->GetTurnPIDOutput(), CommandBase::drivetrain->GetTurnPIDOutput(), false );
 }
 
 bool TurnToAngle::IsFinished()
@@ -29,11 +29,11 @@ bool TurnToAngle::IsFinished()
 
 void TurnToAngle::End()
 {
-	CommandBase::drivetrain->SetRaw(0, 0, false);
-	CommandBase::drivetrain->DisableTurnPID();
+    CommandBase::drivetrain->SetRaw ( 0, 0, false );
+    CommandBase::drivetrain->DisableTurnPID();
 }
 
 void TurnToAngle::Interrupted()
 {
-	
+
 }
