@@ -41,11 +41,6 @@ class Drivetrain : public Subsystem
         double GetTurnPIDError();
         double GetLeftEncoderDistance();
     private:
-        // Voltage max of battery, if it was 12 then all motors would drive
-        // slower when actual voltage > 12. This is because of the division step
-        // in SetVoltage which can lead to slower than 100% motor setpoints
-        const int VOLTAGE_MAX = 13;
-
         const double ENCODER_PULSE_PER_ROTATION = 360;
         const double ENCODER_WHEEL_DIAMETER = 4; // inches
         const double ENCODER_WHEEL_CIRCUMFERENCE = ENCODER_WHEEL_DIAMETER * M_PI;
@@ -74,8 +69,10 @@ class Drivetrain : public Subsystem
         double lastRight = 0;
         double lastRightGhost = 0;
 
-        const double MAX_ACCEL = 0.005 / 2;
-        const double MAX_GHOST_ACCEL = MAX_ACCEL * 15;
+        const double ACCEL_MULT = 1.2;
+
+        const double MAX_ACCEL = 0.0025 * ACCEL_MULT;
+        const double MAX_GHOST_ACCEL = 15 * MAX_ACCEL;
 
         static std::unique_ptr<PowerDistributionPanel> pdp;
 

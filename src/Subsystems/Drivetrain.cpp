@@ -18,6 +18,7 @@ Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
     ahrs = std::make_unique<AHRS> ( SerialPort::kMXP );
 
     LeftVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_LEFT_DRIVE );
+    LeftVictor->SetInverted ( true );
     RightVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_RIGHT_DRIVE );
 
     LeftSolenoid = std::make_unique<frc::DoubleSolenoid> ( SOLENOID_SHIFTER_LEFT_A, SOLENOID_SHIFTER_LEFT_B );
