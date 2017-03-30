@@ -15,7 +15,7 @@ std::unique_ptr<PowerDistributionPanel> Drivetrain::pdp = std::make_unique<Power
 
 Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
 {
-	ahrs = std::make_unique<AHRS> ( SerialPort::kMXP );
+    ahrs = std::make_unique<AHRS> ( SerialPort::kMXP );
 
     LeftVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_LEFT_DRIVE );
     RightVictor = std::make_unique<CardinalDash::VictorSP> ( MOTOR_RIGHT_DRIVE );
@@ -32,30 +32,30 @@ Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
     LeftEncoder->SetDistancePerPulse ( ENCODER_DISTANCE_PER_PULSE );
     RightEncoder->SetDistancePerPulse ( ENCODER_DISTANCE_PER_PULSE );
 
-	LeftOutput = std::make_unique<PIDOutputReceiver> ();
-	RightOutput = std::make_unique<PIDOutputReceiver> ();
+    LeftOutput = std::make_unique<PIDOutputReceiver> ();
+    RightOutput = std::make_unique<PIDOutputReceiver> ();
     LeftPID = std::make_unique<frc::PIDController> ( PID_LEFT_P, PID_LEFT_I, PID_LEFT_D, PID_LEFT_F, LeftEncoder.get(), LeftOutput.get() );
     RightPID = std::make_unique<frc::PIDController> ( PID_RIGHT_P, PID_RIGHT_I, PID_RIGHT_D, PID_RIGHT_F, RightEncoder.get(), RightOutput.get() );
-	
-	TurnOutput = std::make_unique<PIDOutputReceiver> ();
-	TurnPID = std::make_unique<frc::PIDController> ( PID_TURN_P, PID_TURN_I, PID_TURN_D, PID_TURN_F, ahrs.get(), TurnOutput.get());
-	
+
+    TurnOutput = std::make_unique<PIDOutputReceiver> ();
+    TurnPID = std::make_unique<frc::PIDController> ( PID_TURN_P, PID_TURN_I, PID_TURN_D, PID_TURN_F, ahrs.get(), TurnOutput.get() );
+
     LeftPID->SetContinuous ( false );
     RightPID->SetContinuous ( false );
-	
-	LeftPID->SetAbsoluteTolerance( PID_LEFT_TOLERANCE );
-	RightPID->SetAbsoluteTolerance( PID_RIGHT_TOLERANCE );
-	
-	TurnPID->SetContinuous ( true );
-	TurnPID->SetInputRange(-180.0, 180.0);
-	TurnPID->SetOutputRange(-1.0, 1.0);
-	TurnPID->SetAbsoluteTolerance( PID_TURN_TOLERANCE );
-	LiveWindow::GetInstance()->AddActuator("Drivetrain", "TurnPID", TurnPID.get());
-	LiveWindow::GetInstance()->AddActuator("Drivetrain", "LeftPID", LeftPID.get());
-	LiveWindow::GetInstance()->AddActuator("Drivetrain", "RightPID", RightPID.get());
-	LiveWindow::GetInstance()->AddSensor("Drivetrain", "Gyro", ahrs.get());
-	LiveWindow::GetInstance()->AddSensor("Drivetrain", "LeftEncoder", LeftEncoder.get());
-	LiveWindow::GetInstance()->AddSensor("Drivetrain", "RightEncoder", RightEncoder.get());
+
+    LeftPID->SetAbsoluteTolerance ( PID_LEFT_TOLERANCE );
+    RightPID->SetAbsoluteTolerance ( PID_RIGHT_TOLERANCE );
+
+    TurnPID->SetContinuous ( true );
+    TurnPID->SetInputRange ( -180.0, 180.0 );
+    TurnPID->SetOutputRange ( -1.0, 1.0 );
+    TurnPID->SetAbsoluteTolerance ( PID_TURN_TOLERANCE );
+    LiveWindow::GetInstance()->AddActuator ( "Drivetrain", "TurnPID", TurnPID.get() );
+    LiveWindow::GetInstance()->AddActuator ( "Drivetrain", "LeftPID", LeftPID.get() );
+    LiveWindow::GetInstance()->AddActuator ( "Drivetrain", "RightPID", RightPID.get() );
+    LiveWindow::GetInstance()->AddSensor ( "Drivetrain", "Gyro", ahrs.get() );
+    LiveWindow::GetInstance()->AddSensor ( "Drivetrain", "LeftEncoder", LeftEncoder.get() );
+    LiveWindow::GetInstance()->AddSensor ( "Drivetrain", "RightEncoder", RightEncoder.get() );
 
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/leftEncoder" ), &GetEncoderValue, LeftEncoder.get() );
     CardinalDash::Dashboard::Subscribe ( std::string ( "subsystems/drivetrain/rightEncoder" ), &GetEncoderValue, RightEncoder.get() );
@@ -66,16 +66,15 @@ void Drivetrain::InitDefaultCommand()
     SetDefaultCommand ( new TeleopDrive() );
 }
 
-void Drivetrain::SetRaw ( double left, double right, bool currentLimit)
+void Drivetrain::SetRaw ( double left, double right, bool currentLimit )
 {
-	if (currentLimit){
-		SetLeftRaw ( left );
-		SetRightRaw ( right );
-	}
-	else {
-		LeftVictor->Set(left);
-		RightVictor->Set(right);
-	}
+    if ( currentLimit ) {
+        SetLeftRaw ( left );
+        SetRightRaw ( right );
+    } else {
+        LeftVictor->Set ( left );
+        RightVictor->Set ( right );
+    }
 }
 
 void Drivetrain::Set ( double left, double right )
@@ -194,8 +193,8 @@ void Drivetrain::Shift ( bool high )
 
 void Drivetrain::EnablePID()
 {
-	LeftPID->Reset();
-	RightPID->Reset();
+    LeftPID->Reset();
+    RightPID->Reset();
     LeftPID->Enable();
     RightPID->Enable();
 
@@ -217,17 +216,17 @@ void Drivetrain::DisablePID()
 
 bool Drivetrain::DistancePIDDone()
 {
-	return LeftPID->OnTarget();
+    return LeftPID->OnTarget();
 }
 
 double Drivetrain::GetLeftPIDOutput()
 {
-	return LeftOutput->GetValue();
+    return LeftOutput->GetValue();
 }
 
 double Drivetrain::GetRightPIDOutput()
 {
-	return RightOutput->GetValue();
+    return RightOutput->GetValue();
 }
 
 double Drivetrain::GetEncoderValue ( void* instance )
@@ -237,45 +236,45 @@ double Drivetrain::GetEncoderValue ( void* instance )
 
 double Drivetrain::GetAngle ()
 {
-	return ahrs->GetYaw();
+    return ahrs->GetYaw();
 }
 
 void Drivetrain::ResetAngle ()
 {
-	ahrs->Reset();
+    ahrs->Reset();
 }
 
 void Drivetrain::EnableTurnPID()
 {
-	TurnPID->Reset();
-	TurnPID->Enable();
+    TurnPID->Reset();
+    TurnPID->Enable();
 }
 
 void Drivetrain::DisableTurnPID()
 {
-	TurnPID->Disable();
+    TurnPID->Disable();
 }
-void Drivetrain::SetTurnAngle (double value)
+void Drivetrain::SetTurnAngle ( double value )
 {
-	TurnPID->SetSetpoint(value);
+    TurnPID->SetSetpoint ( value );
 }
 
 double Drivetrain::GetTurnPIDOutput ()
 {
-	return TurnOutput->GetValue();
+    return TurnOutput->GetValue();
 }
 
 bool Drivetrain::GetTurnDone ()
 {
-	return TurnPID->OnTarget();
+    return TurnPID->OnTarget();
 }
 
 double Drivetrain::GetTurnPIDError ()
 {
-	return TurnPID->GetError();
+    return TurnPID->GetError();
 }
 
 double Drivetrain::GetLeftEncoderDistance()
 {
-	return LeftEncoder->GetDistance();
+    return LeftEncoder->GetDistance();
 }

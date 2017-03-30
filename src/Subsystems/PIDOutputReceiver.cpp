@@ -1,8 +1,10 @@
 #include "PIDOutputReceiver.h"
-void PIDOutputReceiver::PIDWrite(double output){
-	value = output;
+void PIDOutputReceiver::PIDWrite ( double output )
+{
+    value = output;
 }
 
-double PIDOutputReceiver::GetValue(){
-	return value;
+double PIDOutputReceiver::GetValue()
+{
+    return value;
 }

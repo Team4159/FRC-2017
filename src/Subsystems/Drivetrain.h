@@ -27,19 +27,19 @@ class Drivetrain : public Subsystem
         void EnablePID();
         void DisablePID();
 
-		double GetLeftPIDOutput();
-		double GetRightPIDOutput();
-		bool DistancePIDDone();
-		
-		void SetTurnAngle ( double value );
-		void EnableTurnPID();
-		void DisableTurnPID();
-		double GetAngle();
-		void ResetAngle();
-		double GetTurnPIDOutput();
-		bool GetTurnDone();
-		double GetTurnPIDError();
-		double GetLeftEncoderDistance();
+        double GetLeftPIDOutput();
+        double GetRightPIDOutput();
+        bool DistancePIDDone();
+
+        void SetTurnAngle ( double value );
+        void EnableTurnPID();
+        void DisableTurnPID();
+        double GetAngle();
+        void ResetAngle();
+        double GetTurnPIDOutput();
+        bool GetTurnDone();
+        double GetTurnPIDError();
+        double GetLeftEncoderDistance();
     private:
         // Voltage max of battery, if it was 12 then all motors would drive
         // slower when actual voltage > 12. This is because of the division step
@@ -55,19 +55,19 @@ class Drivetrain : public Subsystem
         const double PID_LEFT_I = 0.0;
         const double PID_LEFT_D = 0.01;
         const double PID_LEFT_F = 0.0;
-		const double PID_LEFT_TOLERANCE = 2;
+        const double PID_LEFT_TOLERANCE = 2;
 
         const double PID_RIGHT_P = 0.1;
         const double PID_RIGHT_I = 0.0;
         const double PID_RIGHT_D = 0.01;
         const double PID_RIGHT_F = 0;
-		const double PID_RIGHT_TOLERANCE = 2;
-		
-		const double PID_TURN_P = 0.03;
-		const double PID_TURN_I = 0;
-		const double PID_TURN_D = 0.1;
-		const double PID_TURN_F = 0;
-		const double PID_TURN_TOLERANCE = 10;
+        const double PID_RIGHT_TOLERANCE = 2;
+
+        const double PID_TURN_P = 0.03;
+        const double PID_TURN_I = 0;
+        const double PID_TURN_D = 0.1;
+        const double PID_TURN_F = 0;
+        const double PID_TURN_TOLERANCE = 10;
 
         double lastLeft = 0;
         double lastLeftGhost = 0;
@@ -90,12 +90,12 @@ class Drivetrain : public Subsystem
 
         std::unique_ptr<frc::PIDController> LeftPID;
         std::unique_ptr<frc::PIDController> RightPID;
-		std::unique_ptr<PIDOutputReceiver> LeftOutput;
-		std::unique_ptr<PIDOutputReceiver> RightOutput;
+        std::unique_ptr<PIDOutputReceiver> LeftOutput;
+        std::unique_ptr<PIDOutputReceiver> RightOutput;
 
-		std::unique_ptr<frc::PIDController> TurnPID;
-		std::unique_ptr<AHRS> ahrs;
-		std::unique_ptr<PIDOutputReceiver> TurnOutput;
+        std::unique_ptr<frc::PIDController> TurnPID;
+        std::unique_ptr<AHRS> ahrs;
+        std::unique_ptr<PIDOutputReceiver> TurnOutput;
 
         static double GetEncoderValue ( void* instance );
 
