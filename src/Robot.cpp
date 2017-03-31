@@ -46,6 +46,7 @@ void Robot::RobotInit()
     chooser->AddObject ( "Left Peg/Forward", new AutoGear ( -1, false ) );
     chooser->AddObject ( "Right Peg/Forward", new AutoGear ( 1, false ) );
     SmartDashboard::PutData ( "Auto mode", chooser );
+	CommandBase::drivetrain->ResetAngle();
 }
 
 void Robot::RobotPeriodic()
@@ -55,6 +56,8 @@ void Robot::RobotPeriodic()
 	frc::SmartDashboard::PutNumber("R Encoder", CommandBase::drivetrain->GetRightEncoderDistance());
 	frc::SmartDashboard::PutNumber("Gyro angle", CommandBase::drivetrain->GetAngle());
 	frc::SmartDashboard::PutNumber("Turn error", CommandBase::drivetrain->GetTurnPIDError());
+	frc::SmartDashboard::PutNumber("L Motor", CommandBase::drivetrain->GetLeftMotor());
+	frc::SmartDashboard::PutNumber("R Motor", CommandBase::drivetrain->GetRightMotor());
 }
 
 void Robot::DisabledInit()

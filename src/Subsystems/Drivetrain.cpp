@@ -284,3 +284,13 @@ double Drivetrain::GetRightEncoderDistance()
 {
     return RightEncoder->GetDistance();
 }
+
+double Drivetrain::GetLeftMotor()
+{
+	return LeftVictor->Get();
+}
+
+double Drivetrain::GetRightMotor()
+{
+	return RightVictor->Get();
+}

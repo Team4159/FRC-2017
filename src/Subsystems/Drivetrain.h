@@ -41,6 +41,8 @@ class Drivetrain : public Subsystem
         double GetTurnPIDError();
         double GetLeftEncoderDistance();
 		double GetRightEncoderDistance();
+		double GetLeftMotor();
+		double GetRightMotor();
     private:
         const double ENCODER_PULSE_PER_ROTATION = 360;
         const double ENCODER_WHEEL_DIAMETER = 4; // inches

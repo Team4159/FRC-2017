@@ -20,6 +20,7 @@ void TurnToAngle::Initialize()
 void TurnToAngle::Execute()
 {
     CommandBase::drivetrain->SetRaw ( -CommandBase::drivetrain->GetTurnPIDOutput(), CommandBase::drivetrain->GetTurnPIDOutput(), false );
+	frc::SmartDashboard::PutNumber("Turn amount", CommandBase::drivetrain->GetTurnPIDOutput());
 }
 
 bool TurnToAngle::IsFinished()
