@@ -279,3 +279,8 @@ double Drivetrain::GetLeftEncoderDistance()
 {
     return LeftEncoder->GetDistance();
 }
+
+double Drivetrain::GetRightEncoderDistance()
+{
+    return RightEncoder->GetDistance();
+}
