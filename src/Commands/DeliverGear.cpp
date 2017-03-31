@@ -6,8 +6,6 @@
 
 DeliverGear::DeliverGear() : CommandGroup ( "DeliverGear" )
 {
-    CommandBase::gearBox->SetLifter ( false );
-    CommandBase::gearBox->SetGripper ( true );
     AddSequential ( new DriveToPeg() );
     AddSequential ( new EjectGear() );
 }
