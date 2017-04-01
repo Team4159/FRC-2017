@@ -51,10 +51,10 @@ void Robot::RobotInit()
 void Robot::RobotPeriodic()
 {
     super::RobotPeriodic();
-	frc::SmartDashboard::PutNumber("L Encoder", CommandBase::drivetrain->GetLeftEncoderDistance());
-	frc::SmartDashboard::PutNumber("R Encoder", CommandBase::drivetrain->GetRightEncoderDistance());
-	frc::SmartDashboard::PutNumber("Gyro angle", CommandBase::drivetrain->GetAngle());
-	frc::SmartDashboard::PutNumber("Turn error", CommandBase::drivetrain->GetTurnPIDError());
+    frc::SmartDashboard::PutNumber ( "L Encoder", CommandBase::drivetrain->GetLeftEncoderDistance() );
+    frc::SmartDashboard::PutNumber ( "R Encoder", CommandBase::drivetrain->GetRightEncoderDistance() );
+    frc::SmartDashboard::PutNumber ( "Gyro angle", CommandBase::drivetrain->GetAngle() );
+    frc::SmartDashboard::PutNumber ( "Turn error", CommandBase::drivetrain->GetTurnPIDError() );
 }
 
 void Robot::DisabledInit()

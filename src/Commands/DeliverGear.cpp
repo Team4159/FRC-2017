@@ -6,6 +6,6 @@
 
 DeliverGear::DeliverGear() : CommandGroup ( "DeliverGear" )
 {
-    AddSequential ( new DriveToPeg() );
+    //AddSequential ( new DriveToPeg() );
     AddSequential ( new EjectGear() );
 }
