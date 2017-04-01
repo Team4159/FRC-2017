@@ -78,7 +78,7 @@ void Robot::AutonomousInit()
     super::AutonomousInit();
     CommandBase::Enable();
     CommandBase::drivetrain->ResetAngle();
-
+	CommandBase::drivetrain->Shift(false);
     autonomousCommand = chooser->GetSelected();
     if ( autonomousCommand != nullptr ) {
         autonomousCommand->Start();
