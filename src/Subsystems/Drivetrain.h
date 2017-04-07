@@ -10,7 +10,7 @@
 #include "PIDOutputReceiver.h"
 
 #include "WPILib.h"
-#include "AHRS.h"
+#include "navx-mxp/AHRS.h"
 
 class Drivetrain : public Subsystem
 {
@@ -40,6 +40,7 @@ class Drivetrain : public Subsystem
         bool GetTurnDone();
         double GetTurnPIDError();
         double GetLeftEncoderDistance();
+        double GetRightEncoderDistance();
     private:
         const double ENCODER_PULSE_PER_ROTATION = 360;
         const double ENCODER_WHEEL_DIAMETER = 4; // inches

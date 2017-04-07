@@ -9,7 +9,6 @@ Team 4159 CardinalBotics robot code for 2017 FRC season
  - GNU make
  - Astyle
  - Install WPILib (http://wpilib.screenstepslive.com/s/4485/m/13503/l/599679-installing-eclipse-c-java)
- - Install NavX library (http://www.pdocs.kauailabs.com/navx-mxp/software/roborio-libraries/c/)
 - Install WPILib toolchain (http://first.wpi.edu/FRC/roborio/toolchains/)
 
 ## Building

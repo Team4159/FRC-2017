@@ -5,7 +5,7 @@
 #include "CardinalDash/VictorSP.h"
 #include "CardinalDash/Dashboard.h"
 
-#include "AHRS.h"
+#include "navx-mxp/AHRS.h"
 
 #include <DoubleSolenoid.h>
 
@@ -27,7 +27,7 @@ Drivetrain::Drivetrain() : Subsystem ( "Drivetrain" )
     LeftEncoder = std::make_unique<frc::Encoder> ( ENCODER_DRIVE_LEFT_A, ENCODER_DRIVE_LEFT_B );
     RightEncoder = std::make_unique<frc::Encoder> ( ENCODER_DRIVE_RIGHT_A, ENCODER_DRIVE_RIGHT_B );
 
-    LeftEncoder->SetReverseDirection ( true );
+    LeftEncoder->SetReverseDirection ( false );
     RightEncoder->SetReverseDirection ( true );
 
     LeftEncoder->SetDistancePerPulse ( ENCODER_DISTANCE_PER_PULSE );
@@ -278,4 +278,9 @@ double Drivetrain::GetTurnPIDError ()
 double Drivetrain::GetLeftEncoderDistance()
 {
     return LeftEncoder->GetDistance();
+}
+
+double Drivetrain::GetRightEncoderDistance()
+{
+    return RightEncoder->GetDistance();
 }
