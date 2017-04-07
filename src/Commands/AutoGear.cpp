@@ -11,7 +11,7 @@ AutoGear::AutoGear ( int peg, bool diagonal ) : CommandGroup ( "AutoGear" )
     if ( peg==0 ) {
         // Middle peg
         // Use PID to move halfway
-        AddSequential ( new DriveDistance ( (131-10)*(1-(10/((131-10)))) ) );
+        AddSequential ( new DriveDistance ( (131-10) ) );
 
     } else if ( peg==-1 ) {
         // Left peg

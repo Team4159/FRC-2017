@@ -6,7 +6,7 @@
 DriveDistance::DriveDistance ( double distance ) : CommandBase ( "DriveDistance" )
 {
     Requires ( CommandBase::drivetrain.get() );
-    driveDistance = distance;
+    driveDistance = distance * 1 - ( 10/((131-10)));
 }
 
 void DriveDistance::Initialize()

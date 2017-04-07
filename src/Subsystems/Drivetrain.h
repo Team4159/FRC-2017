@@ -10,7 +10,7 @@
 #include "PIDOutputReceiver.h"
 
 #include "WPILib.h"
-#include "AHRS.h"
+#include "navx-mxp/AHRS.h"
 
 class Drivetrain : public Subsystem
 {

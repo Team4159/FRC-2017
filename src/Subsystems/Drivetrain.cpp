@@ -5,7 +5,7 @@
 #include "CardinalDash/VictorSP.h"
 #include "CardinalDash/Dashboard.h"
 
-#include "AHRS.h"
+#include "navx-mxp/AHRS.h"
 
 #include <DoubleSolenoid.h>
 
