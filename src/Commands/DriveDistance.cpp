@@ -6,7 +6,7 @@
 DriveDistance::DriveDistance ( double distance ) : CommandBase ( "DriveDistance" )
 {
     Requires ( CommandBase::drivetrain.get() );
-    driveDistance = distance * 1 - ( 10/((131-10)));
+    driveDistance = distance;
 }
 
 void DriveDistance::Initialize()
@@ -22,15 +22,13 @@ void DriveDistance::Initialize()
 
 void DriveDistance::Execute()
 {
-    double leftoutput = -CommandBase::drivetrain->GetLeftPIDOutput();// - CommandBase::drivetrain->GetTurnPIDOutput();
+    double leftoutput = -CommandBase::drivetrain->GetLeftPIDOutput() - CommandBase::drivetrain->GetTurnPIDOutput();
 
 #ifdef RIGHT_ENCODER_AVAILABLE
-    double rightoutput = -CommandBase::drivetrain->GetRightPIDOutput();// + CommandBase::drivetrain->GetTurnPIDOutput();
+    double rightoutput = -CommandBase::drivetrain->GetRightPIDOutput() + CommandBase::drivetrain->GetTurnPIDOutput();
 #else
-    double rightoutput = -CommandBase::drivetrain->GetLeftPIDOutput();// + CommandBase::drivetrain->GetTurnPIDOutput();
+    double rightoutput = -CommandBase::drivetrain->GetLeftPIDOutput() + CommandBase::drivetrain->GetTurnPIDOutput();
 #endif
-    leftoutput *= 0.73*0.5;
-    rightoutput *= 0.5;
     // Scale outputs down to fit in range -1 to 1
     if ( std::fabs ( leftoutput ) > 1 || std::fabs ( rightoutput ) > 1 ) {
         // Scale larger output to 1 and keep ratio of two outputs the same
